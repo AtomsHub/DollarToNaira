@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\CurrencyController;
 
-use App\Http\Controllers\echangeController;
+use App\Http\Controllers\ExchangeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -37,13 +37,13 @@ Route::prefix('dashboard')->group(function () {
     Route::put('/currencies/{id}', [CurrencyController::class, 'update'])->name('currencies.update');
     Route::delete('/currencies/{id}', [CurrencyController::class, 'destroy'])->name('currencies.destroy');
 
-    Route::get('exchange-rates', [echangeController::class, 'index'])->name('exchange-rates.index');
-    Route::post('exchange-rates', [echangeController::class, 'store'])->name('exchange-rates.store');
+    Route::get('exchange-rates', [ExchangeController::class, 'index'])->name('exchange-rates.index');
+    Route::post('exchange-rates', [ExchangeController::class, 'store'])->name('exchange-rates.store');
 
-    Route::put('exchange-rates/{id}', [echangeController::class, 'update'])->name('exchange-rates.update');
+    Route::put('exchange-rates/{id}', [ExchangeController::class, 'update'])->name('exchange-rates.update');
 
-    // Route::put('exchange-rates/update', [echangeController::class, 'update'])->name('exchange-rates.update');
-    Route::get('exchange-rates/delete/{id}', [echangeController::class, 'destroy'])->name('exchange-rates.delete');
+    // Route::put('exchange-rates/update', [ExchangeController::class, 'update'])->name('exchange-rates.update');
+    Route::get('exchange-rates/delete/{id}', [ExchangeController::class, 'destroy'])->name('exchange-rates.delete');
 
 
 

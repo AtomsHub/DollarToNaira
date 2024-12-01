@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ExchangeRate;
 use Illuminate\Http\Request;
 
-class echangeController extends Controller
+class ExchangeController extends Controller
 {
     //
     public function index()
