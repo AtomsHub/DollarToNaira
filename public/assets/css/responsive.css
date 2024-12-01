@@ -1,0 +1,149 @@
+
+
+/* Extra small devices (phones, 576px and down) */
+@media (max-width: 576px) { 
+
+    .hero-content_heading {
+        font-size: 40px;
+        line-height: 50px;
+    }
+
+
+    .hero-content_paragraph {
+        font-size: 16px;
+        line-height: 24px;
+        padding: 0 20px;
+        margin-top: 12px;
+    }
+    
+    div.dt-container div.dt-layout-row {
+        display: block !important;
+    }
+
+    .div.dt-container .dt-search input, input#dt-search-0 {
+        width: 100%;
+    }
+
+    .exchange-header {
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 40px;
+        color: #2772A4;
+    }
+    .exchange-sub_header {
+        padding: 0 20px;
+        font-size: 18px;
+        font-weight: 300;
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .nav-logo_img {
+        height: 40px;
+        width: auto;
+    }
+
+    .hero-content_heading br{
+        display: none;
+    }
+
+    .sidebar {
+        padding: 0 10px;
+    }
+
+    .dashboard-content {
+        width: 100%;
+    } 
+    
+
+    
+
+    
+
+}
+
+
+/* Small devices (landscape phones, between 576px and 767.98px) */
+@media (min-width: 576.2px) and (max-width: 767.98px) {  
+    
+
+      
+}
+
+@media (min-width: 768px) {
+    section {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    .payable-dues_card {
+        font-size: 100%;
+    }
+
+    
+    .balance-card_title {
+        font-size: 32px;
+    }
+ 
+
+    .dt-search input {
+        width: 290px;
+    }
+
+    
+}
+
+@media (max-width: 991.98px) {
+
+   
+    
+}
+
+/* Medium devices (tablets, between 768px and 991.98px) */
+
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .hero-content_heading {
+        font-size: 45px;
+        line-height: 60px;
+    }
+
+    .hero-content_paragraph {
+        font-size: 20px;
+        line-height: 30px;
+        padding: 0 20px;
+        margin-top: 12px;
+    }
+
+    .hero-content_heading br{
+        display: block;
+    }
+    
+    .hero-content_paragraph br {
+        display: block;
+    }
+
+    .dashboard .sidebar {
+        width: 22%;
+    }
+
+    .dashboard-content {
+        width: 78%;
+    }
+}
+
+/* Large  devices (desktop, 992px and up) */
+@media (min-width: 992px) { 
+    .dashboard .sidebar {
+        width: 20%;
+    }
+
+    .dashboard-content {
+        width: 80%;
+    }
+
+    .dashboard-content_details_filter.col-2 {
+        width: 14% !important;
+    }
+}
+
