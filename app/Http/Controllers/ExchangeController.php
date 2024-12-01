@@ -24,7 +24,6 @@ class ExchangeController extends Controller
             'provider' => 'required|string',
             'rate' => 'required|numeric',
         ]);
-
         // Store new exchange rate
         ExchangeRate::create($validated);
 

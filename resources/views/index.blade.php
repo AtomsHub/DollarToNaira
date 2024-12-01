@@ -96,20 +96,35 @@
                                     </thead>
                                     <tbody>
                                         @forelse ($currencies as $key => $currency)
-                                            <tr>
-                                               
-                                                <td>
-                                                    {{ $currency->currency->symbol }} {{ $currency->currency->code }} {{ $currency->currency->name }}
-                                                  
-                                                </td>
-                                                <td>
+                                        <tr>
+                                            <td>
+                                                <div style="display: flex; align-items: center;">
+                                                    <img src="{{ $currency->currency->image_url  }}" 
+                                                         alt="{{ $currency->currency->name }}" 
+                                                         style="width: 30px; height: 30px; margin-right: 10px; border-radius: 50%;">
                                                     <div>
-                                                        <p class="rata">{{ $currency->sign }}{{ number_format($currency->buy, 2) }}</p>
-                                                        <p class="rate-small">Buy / Sell: {{ $currency->sign }}{{ number_format($currency->sell, 2) }}</p>
+                                                        <strong>{{ $currency->currency->symbol }} {{ $currency->currency->code }}</strong><br>
+                                                        <span>{{ $currency->currency->name }}</span>
                                                     </div>
-                                                </td>
-                                                <td>{{ $currency->updated_at->diffForHumans() }}</td>
-                                            </tr>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <p class="rata" style="font-size: 18px; font-weight: bold;">
+                                                        {{ $currency->sign }}{{ number_format($currency->buy, 2) }}
+                                                    </p>
+                                                    <p class="rate-small" style="color: gray;">
+                                                        Buy / Sell: {{ $currency->sign }}{{ number_format($currency->sell, 2) }}
+                                                    </p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span style="font-size: 14px; color: gray;">
+                                                    {{ $currency->updated_at->diffForHumans() }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        
                                         @empty
                                             <tr>
                                                 <td colspan="4" class="text-center">No currencies available</td>
@@ -317,9 +332,9 @@
                                         How to make 1 million dollars in 100 days without working
                                     </p>
 
-                                    <p class="blog-details">
+                                    {{-- <p class="blog-details">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sollicitudin odio. Nulla facilisi. Donec eleifend, felis vel laoreet tristique, velit mauris euismod arcu, at placerat felis ligula non erat.
-                                    </p>
+                                    </p> --}}
 
             
                                     <div class="blog-meta mt-2">
@@ -346,9 +361,9 @@
                                         How to make 1 million dollars in 100 days without working
                                     </p>
 
-                                    <p class="blog-details">
+                                    {{-- <p class="blog-details">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sollicitudin odio. Nulla facilisi. Donec eleifend, felis vel laoreet tristique, velit mauris euismod arcu, at placerat felis ligula non erat.
-                                    </p>
+                                    </p> --}}
 
             
                                     <div class="blog-meta mt-2">
@@ -375,9 +390,9 @@
                                         How to make 1 million dollars in 100 days without working
                                     </p>
 
-                                    <p class="blog-details">
+                                    {{-- <p class="blog-details">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sollicitudin odio. Nulla facilisi. Donec eleifend, felis vel laoreet tristique, velit mauris euismod arcu, at placerat felis ligula non erat.
-                                    </p>
+                                    </p> --}}
 
             
                                     <div class="blog-meta mt-2">
@@ -404,9 +419,9 @@
                                         How to make 1 million dollars in 100 days without working
                                     </p>
 
-                                    <p class="blog-details">
+                                    {{-- <p class="blog-details">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sollicitudin odio. Nulla facilisi. Donec eleifend, felis vel laoreet tristique, velit mauris euismod arcu, at placerat felis ligula non erat.
-                                    </p>
+                                    </p> --}}
 
             
                                     <div class="blog-meta mt-2">
@@ -433,9 +448,9 @@
                                         How to make 1 million dollars in 100 days without working
                                     </p>
 
-                                    <p class="blog-details">
+                                    {{-- <p class="blog-details">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sollicitudin odio. Nulla facilisi. Donec eleifend, felis vel laoreet tristique, velit mauris euismod arcu, at placerat felis ligula non erat.
-                                    </p>
+                                    </p> --}}
 
             
                                     <div class="blog-meta mt-2">
@@ -462,9 +477,9 @@
                                         How to make 1 million dollars in 100 days without working
                                     </p>
 
-                                    <p class="blog-details">
+                                    {{-- <p class="blog-details">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sollicitudin odio. Nulla facilisi. Donec eleifend, felis vel laoreet tristique, velit mauris euismod arcu, at placerat felis ligula non erat.
-                                    </p>
+                                    </p> --}}
 
             
                                     <div class="blog-meta mt-2">

@@ -31,6 +31,8 @@ Route::get('/', [CurrencyController::class, 'MAININDEX'])->name('index');
 
 Route::get('/api/exchange-rate/{currency}', [CurrencyController::class, 'getRate'])->name('api.exchangeRate');
 Route::prefix('dashboard')->group(function () {
+    Route::get('/', [CurrencyController::class, 'dashboardindex'])->name('dashboardindex.index');
+
     Route::get('/currencies', [CurrencyController::class, 'index'])->name('currencies.index');
     Route::post('/currencies', [CurrencyController::class, 'store'])->name('currencies.store');
     Route::get('/currencies/{id}/edit', [CurrencyController::class, 'edit'])->name('currencies.edit');
