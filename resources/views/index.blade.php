@@ -555,7 +555,9 @@
         <script>
             $(document).ready(function() {
                 $('#rate').DataTable({
-                    pageLength: 25
+                    pageLength: 25,
+                    lengthChange:false,
+                    searching:false
                 });
             });
        
