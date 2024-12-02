@@ -75,12 +75,17 @@ class CurrencyController extends Controller
         return redirect()->route('currencies.index')->with('success', 'Currency added successfully!');
     }
     // Update the currency
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $currency = Currencyrates::findOrFail($id);
+        // dd($request->all());
+        $currency = Currencyrates::findOrFail($request->id);
+        
+        // dd($id);
         $currency->update($request->all());
 
         return redirect()->route('currencies.index')->with('success', 'Currency updated successfully!');
+
+
     }
 
     public function getRate($currency)

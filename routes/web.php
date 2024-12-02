@@ -36,7 +36,9 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/currencies', [CurrencyController::class, 'index'])->name('currencies.index');
     Route::post('/currencies', [CurrencyController::class, 'store'])->name('currencies.store');
     Route::get('/currencies/{id}/edit', [CurrencyController::class, 'edit'])->name('currencies.edit');
-    Route::put('/currencies/{id}', [CurrencyController::class, 'update'])->name('currencies.update');
+    // Route::put('/currencies/{id}', [CurrencyController::class, 'update'])->name('currencies.update');
+    Route::post('/currencies/update', [CurrencyController::class, 'update'])->name('currencies.update');
+
     Route::delete('/currencies/{id}', [CurrencyController::class, 'destroy'])->name('currencies.destroy');
 
     Route::get('exchange-rates', [ExchangeController::class, 'index'])->name('exchange-rates.index');

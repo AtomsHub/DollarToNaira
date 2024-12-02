@@ -169,31 +169,25 @@
                                         <th>Currency Name</th>
                                         <th>Buy Rate</th>
                                         <th>Sell Rate</th>
-                                     
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($currencies as $currency)
-                                    <tr class="text-center">
+                                    <tr class="text-center" id="currencyRow-{{ $currency->id }}">
                                         <td>{{ $loop->iteration }}.</td>
-                                        <td>{{ $currency->currency->symbol }} {{ $currency->currency->code }} {{ $currency->currency->name }}</td>
-                                        <td>{{ $currency->buy }}</td>
-                                        <td>{{ $currency->sell }}</td>
-                                      
+                                        <td id="currencyName-{{ $currency->id }}">{{ $currency->currency->symbol }} {{ $currency->currency->code }} {{ $currency->currency->name }}</td>
+                                        <td id="currencyBuy-{{ $currency->id }}">{{ $currency->buy }}</td>
+                                        <td id="currencySell-{{ $currency->id }}">{{ $currency->sell }}</td>
                                         <td>
-                                            <!-- Edit Button -->
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editCurrencyModal"
+                                            <button type="button" class="btn btn-primary btn-sm edit-btn" data-bs-toggle="modal" data-bs-target="#editCurrencyModal"
                                                 data-id="{{ $currency->id }}"
-                                                data-currency-id="{{ $currency->currency_id }}" 
-                                                data-currency-name="{{ $currency->currency->name }}" 
+                                                data-currency-id="{{ $currency->currency_id }}"
+                                                data-currency-name="{{ $currency->currency->name }}"
                                                 data-buy="{{ $currency->buy }}"
-                                                data-sell="{{ $currency->sell }}"
-                                                data-sign="{{ $currency->currency->symbol }}">
+                                                data-sell="{{ $currency->sell }}">
                                                 Edit Currency
                                             </button>
-                    
-                                            <!-- Delete Button -->
                                             <form action="{{ route('currencies.destroy', $currency->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
@@ -250,42 +244,34 @@
                     
                 
 
-                    <div class="modal fade" id="editCurrencyModal" tabindex="-1" aria-labelledby="editCurrencyLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                            <div class="modal-content p-3 py-5 p-md-4 py-md-3">
-                                <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn-close mb-3 border rounded-md p-1" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body mx-1 mx-md-3 row justify-content-center">
-                                    <div class="modal-form">
-                                        <form action="{{ route('currencies.update', ['id' => $currency->id]) }}" method="POST" id="editCurrencyForm">
-                                            @csrf
-                                            @method('PUT') 
-                                           <!-- Updated Currency Select Dropdown -->
-                                            <!-- Updated Currency Input Field -->
-                                            <div class="text-start mb-3">
-                                                <label for="editCurrencyName" class="form-label fw-medium mb-1">Currency</label>
-                                                <input type="text" class="form-control ps-3" name="" id="editCurrencyName" readonly required>
-                                                <input type="hidden" name="currency_id" id="editCurrencyId" required>
-                                            </div>
-
-
-                    
-                                            <div class="text-start mb-3">
-                                                <label for="editBuyRate" class="form-label fw-medium mb-1">Buy Rate</label>
-                                                <input type="number" class="form-control ps-3" name="buy" id="editBuyRate" required>
-                                            </div>
-                    
-                                            <div class="text-start mb-3">
-                                                <label for="editSellRate" class="form-label fw-medium mb-1">Sell Rate</label>
-                                                <input type="number" class="form-control ps-3" name="sell" id="editSellRate" required>
-                                            </div>
-                    
-                                            
-                                            <button class="btn btn-success w-100 mt-3 modal-button">Update Currency</button>
-                                        </form>
+                    <div class="modal fade" id="editCurrencyModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <form id="editCurrencyForm">
+                                    @csrf
+                                    <input type="hidden" name="id" id="editCurrencyId">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Edit Currency</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="editCurrencyName" class="form-label">Currency Name</label>
+                                            <input type="text" class="form-control" id="editCurrencyName" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="editBuyRate" class="form-label">Buy Rate</label>
+                                            <input type="number" class="form-control" id="editBuyRate" name="buy">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="editSellRate" class="form-label">Sell Rate</label>
+                                            <input type="number" class="form-control" id="editSellRate" name="sell">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success">Update</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -314,31 +300,59 @@
         <!-- Custom JS -->
         <script src="../assets/js/main.js"></script>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var editModal = document.getElementById('editCurrencyModal');
-                editModal.addEventListener('show.bs.modal', function (event) {
-                    var button = event.relatedTarget;
-            
-                    // Extract data attributes from the button
-                    var id = button.getAttribute('data-id');
-                    var currencyId = button.getAttribute('data-currency-id'); // This is the currency_id from currencyrates
-                    var currencyName = button.getAttribute('data-currency-name'); // This is the currency name
-                    var buy = button.getAttribute('data-buy');
-                    var sell = button.getAttribute('data-sell');
-                    var sign = button.getAttribute('data-sign');
-            
-                    // Populate the modal fields
-                    document.getElementById('editCurrencyName').value = currencyName; // Set the currency name
-                    document.getElementById('editCurrencyId').value = currencyId; // Set the hidden currency_id
-                    
-                    document.getElementById('editBuyRate').value = buy;
-                    document.getElementById('editSellRate').value = sell;
-                    document.getElementById('editCurrencySign').value = sign;
-            
-                    // Set the form action dynamically
-                    document.getElementById('editCurrencyForm').action = `/currencies/${id}`;
+            $(document).ready(function () {
+                // Populate the modal with data
+                $(".edit-btn").on("click", function () {
+                    const id = $(this).data("id");
+                    const currencyId = $(this).data("currency-id");
+                    const name = $(this).data("currency-name");
+                    const buy = $(this).data("buy");
+                    const sell = $(this).data("sell");
+
+                    $("#editCurrencyId").val(id);
+                    $("#editCurrencyName").val(name);
+                    $("#editBuyRate").val(buy);
+                    $("#editSellRate").val(sell);
+                });
+
+                // Handle form submission
+                $("#editCurrencyForm").on("submit", function (e) {
+                    e.preventDefault();
+
+                    const id = $("#editCurrencyId").val();
+                    const buy = $("#editBuyRate").val();
+                    const sell = $("#editSellRate").val();
+                    const url = `currencies/update`; // Adjust your route as needed
+
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id: id,
+                            buy: buy,
+                            sell: sell,
+                        },
+                        success: function (response) {
+                            // Update the table row with the new data
+                            $(`#currencyBuy-${id}`).text(response.buy);
+                            $(`#currencySell-${id}`).text(response.sell);
+
+                            // Close the modal
+                            $("#editCurrencyModal").modal("hide");
+
+                            // Optionally, display a success message
+                            // alert("Currency updated successfully!");
+                            location.reload();
+                        },
+                        error: function (xhr) {
+                            alert("An error occurred. Please try again.");
+                        },
+                    });
                 });
             });
+
+
         </script>
         
         

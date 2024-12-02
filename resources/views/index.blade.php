@@ -32,6 +32,9 @@
         <!-- Custom CSS -->
         <link href="assets/css/style.css" rel="stylesheet">
         <link href="assets/css/responsive.css" rel="stylesheet">
+
+        <style>.overlay-text {
+    position: absolute;}</style>
     </head>
     <body>
 
@@ -82,16 +85,16 @@
     
                     <!-- Hero Table -->
                     <div class="px-3">
-                        <div class="border p-3 p-md-5 mt-3 rounded">
+                       
                            <div class="row">
                             <div class="table-responsive">
                                 <table id="rate" class="table table-striped">
                                     <thead>
-                                        <tr>
+                                        <tr >
                                            
-                                            <th>Currency</th>
+                                            <th >Currency</th>
                                             <th>Rate</th>
-                                            {{-- <th>Last Updated</th> --}}
+                                            <th>Last Update</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -104,36 +107,31 @@
                                                          style="width: 30px; height: 30px; margin-right: 10px; border-radius: 50%;">
                                                     <div>
                                                         <strong>{{ $currency->currency->symbol }} {{ $currency->currency->code }}</strong><br>
-                                                        {{-- <span>{{ $currency->currency->name }}</span> --}}
+                                                        <span>{{ $currency->currency->name }}</span>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>
-                                                <div style="text-align: left; font-size: 16px;">
-                                                    <div style="margin-bottom: 5px;">
-                                                        <span style="font-weight: bold; color: black;">Buy:</span>
-                                                        <span style="font-size: 15px; font-weight: bold; color: #2ecc71;">
-                                                            {{ $currency->sign }}{{ number_format($currency->buy) }}
-                                                        </span>
+                                            <td width="50%">
+                                                    <div class="row">
+                                                        <div class="col">BUY</div>
+                                                        <div class="col"><span class="overlay-text">{{ $currency->sign }}{{ number_format($currency->buy) }}</span></div>
                                                     </div>
-                                                    <div style="margin-bottom: 5px;">
-                                                        <span style="font-weight: bold; color: black;">Sell:</span>
-                                                        <span style="font-size: 15px; font-weight: bold; color: #e74c3c;">
-                                                            {{ $currency->sign }}{{ number_format($currency->sell) }}
-                                                        </span>
+                                                    <div class="row">
+                                                        <div class="col">SELL</div>
+                                                        <div class="col"><span class="overlay-text">{{ $currency->sign }}{{ number_format($currency->sell) }}</span></div>
                                                     </div>
-                                                    <div style="margin-bottom: 5px;">
+                                                    {{-- <div style="margin-bottom: 5px;">
                                                         <span style="font-weight: bold; color: black;"> {{ $currency->updated_at->diffForHumans() }}</span>
                                                        
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                                 
                                             </td>
-                                            {{-- <td>
+                                            <td>
                                                 <span style="font-size: 14px; color: gray;">
                                                     {{ $currency->updated_at->diffForHumans() }}
                                                 </span>
-                                            </td> --}}
+                                            </td>
                                         </tr>
                                         
                                         @empty
@@ -147,8 +145,11 @@
                             
                             
                            </div>
-                        </div>
+                      
                     </div>
+                  
+
+                    
         
                 </div>
             </div>
