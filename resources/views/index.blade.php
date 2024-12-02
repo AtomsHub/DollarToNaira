@@ -89,9 +89,9 @@
                                     <thead>
                                         <tr>
                                            
-                                            <th>Currency Name</th>
+                                            <th>Currency</th>
                                             <th>Rate</th>
-                                            <th>Last Updated</th>
+                                            {{-- <th>Last Updated</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -104,7 +104,7 @@
                                                          style="width: 30px; height: 30px; margin-right: 10px; border-radius: 50%;">
                                                     <div>
                                                         <strong>{{ $currency->currency->symbol }} {{ $currency->currency->code }}</strong><br>
-                                                        <span>{{ $currency->currency->name }}</span>
+                                                        {{-- <span>{{ $currency->currency->name }}</span> --}}
                                                     </div>
                                                 </div>
                                             </td>
@@ -112,24 +112,28 @@
                                                 <div style="text-align: left; font-size: 16px;">
                                                     <div style="margin-bottom: 5px;">
                                                         <span style="font-weight: bold; color: black;">Buy:</span>
-                                                        <span style="font-size: 18px; font-weight: bold; color: #2ecc71;">
-                                                            {{ $currency->sign }}{{ number_format($currency->buy, 2) }}
+                                                        <span style="font-size: 15px; font-weight: bold; color: #2ecc71;">
+                                                            {{ $currency->sign }}{{ number_format($currency->buy) }}
                                                         </span>
                                                     </div>
-                                                    <div>
+                                                    <div style="margin-bottom: 5px;">
                                                         <span style="font-weight: bold; color: black;">Sell:</span>
-                                                        <span style="font-size: 18px; font-weight: bold; color: #e74c3c;">
-                                                            {{ $currency->sign }}{{ number_format($currency->sell, 2) }}
+                                                        <span style="font-size: 15px; font-weight: bold; color: #e74c3c;">
+                                                            {{ $currency->sign }}{{ number_format($currency->sell) }}
                                                         </span>
+                                                    </div>
+                                                    <div style="margin-bottom: 5px;">
+                                                        <span style="font-weight: bold; color: black;"> {{ $currency->updated_at->diffForHumans() }}</span>
+                                                       
                                                     </div>
                                                 </div>
                                                 
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <span style="font-size: 14px; color: gray;">
                                                     {{ $currency->updated_at->diffForHumans() }}
                                                 </span>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                         
                                         @empty
