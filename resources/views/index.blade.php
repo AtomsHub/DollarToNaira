@@ -109,14 +109,21 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div>
-                                                    <p class="rata" style="font-size: 18px; font-weight: bold;">
-                                                        {{ $currency->sign }}{{ number_format($currency->buy, 2) }}
-                                                    </p>
-                                                    <p class="rate-small" style="color: gray;">
-                                                        Buy / Sell: {{ $currency->sign }}{{ number_format($currency->sell, 2) }}
-                                                    </p>
+                                                <div style="text-align: left; font-size: 16px;">
+                                                    <div style="margin-bottom: 5px;">
+                                                        <span style="font-weight: bold; color: black;">Buy:</span>
+                                                        <span style="font-size: 18px; font-weight: bold; color: #2ecc71;">
+                                                            {{ $currency->sign }}{{ number_format($currency->buy, 2) }}
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span style="font-weight: bold; color: black;">Sell:</span>
+                                                        <span style="font-size: 18px; font-weight: bold; color: #e74c3c;">
+                                                            {{ $currency->sign }}{{ number_format($currency->sell, 2) }}
+                                                        </span>
+                                                    </div>
                                                 </div>
+                                                
                                             </td>
                                             <td>
                                                 <span style="font-size: 14px; color: gray;">
