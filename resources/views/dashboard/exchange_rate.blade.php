@@ -184,8 +184,12 @@
                                             <td>{{ $loop->iteration }}</td>
                                            
                                             <td>
-                                                <img src="../assets/img/image.png" height="25" width="auto" alt="">
-                                                CBN
+                                                @if ($rate->provider=="CBN")
+                                                    <img src="../assets/img/image.png" height="25" width="auto" alt="">
+                                                @else
+                                                    <img src="../assets/img/image (1).png" height="25" width="auto" alt="">
+                                                @endif
+                                                {{ $rate->provider }}
                                             </td>
                                             
                                             <td>{{ $rate->currency->symbol }} {{ $rate->currency->code }} {{ $rate->currency->name }}</td>
