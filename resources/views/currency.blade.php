@@ -79,7 +79,7 @@
         <header class="">
             <nav class="navbar navbar-dark navbar-expand-lg d-flex justify-content-between align-items-center py-4 px-3 px-md-5">
                 <div class="nav-logo d-flex align-items-center justify-content-between">
-                    <span class="nav-logo_text ms-2">Exchange logo</span>
+                    <span class="nav-logo_text ms-2">DollarToNaira</span>
                 </div>
                 <div class="d-flex gap-3 align-items-center">
                     <a href="" class="d-flex">
