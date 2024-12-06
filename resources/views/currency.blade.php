@@ -479,58 +479,7 @@
         </section>
         <!-- Ends FAQ -->
 
-        <section class="px-3 px-md-0">
-            <div class="container">
-                <h3 class="fw-bold mb-3">Why trust us?</h3>
-                <p>
-                    We take reader trust seriously. At Currency Live we're working to help our readers learn more about currency exchange so they can avoid the common pitfalls and make more of their money. Here's why you can trust us to do just
-                    that:&gt;
-                </p>
-
-                <div class="d-flex gap-4 mt-4">
-                    <div>
-                        <img width="80" height="80" src="/assets/img/icon-expertise.jpg" />
-                    </div>
-                    <div>
-                        <span class="fw-bold">Expertise and Transparency by our partnership with Wise</span>
-                        <p>
-                            Our partnership with Wise reinforces our commitment to delivering transparent and reliable financial insights and aiding more than millions of monthly users in their money transfers. We already have a billion impressions
-                            and over a million yearly visitors who benefit from the depth of insight and actionable tips we can provide them.
-                        </p>
-                    </div>
-                </div>
-                <div class="d-flex gap-4 mt-4">
-                    <div>
-                        <img width="80" height="80" src="/assets/img/icon-marketScope.jpg" />
-                    </div>
-                    <div>
-                        <span class="fw-bold">Broad market scope</span>
-                        <p>At Currency Live we cover all of currency pairs, with rates which are refreshed in real time so you'll know the details you're reading are accurate, extensive and live.</p>
-                    </div>
-                </div>
-                <div class="d-flex gap-4 mt-4">
-                    <div>
-                        <img width="80" height="80" src="/assets/img/icon-reliable.jpg" />
-                    </div>
-                    <div>
-                        <span class="fw-bold">Reliable Market Analysis</span>
-                        <p>Our market analysis and currency news are up-to-date, researched and presented in an easy-to-understand format. This ensures you get accurate and actionable information, without any unnecessary complexities.</p>
-                    </div>
-                </div>
-                <div class="d-flex gap-4 mt-4">
-                    <div>
-                        <img width="80" height="80" src="/assets/img/icon-commitment.jpg" />
-                    </div>
-                    <div>
-                        <span class="fw-bold">Commitment to Accurate Currency Information</span>
-                        <p>
-                            Currency Live was built by currency exchange experts with over 10 years experience, and we are proud to dedicate ourselves to providing essential and current information, aiding users with valuable insights for currency
-                            conversion and financial decision-making.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+      
 
 
         <footer>
