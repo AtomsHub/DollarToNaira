@@ -29,24 +29,73 @@ class CurrencyController extends Controller
         ->where('provider', 'Black Market')
         ->value('rate');
 
-        // dd($rate);
+            // dd($rate);
 
-    // Define the dollar values
-    $dollarValues = [1, 5, 10, 15, 20, 25, 30, 37, 40,45,50,60,70,100,150,200,250,300,400,500,700,1000,1500,2000,3000];
+        // Define the dollar values
+        $dollarValues = [1, 5, 10, 15, 20, 25, 30, 37, 40,45,50,60,70,100,150,200,250,300,400,500,700,1000,1500,2000,3000];
 
-    // Calculate conversions
-    $conversions = [];
-    foreach ($dollarValues as $value) {
-        $conversions[] = [
-            'dollar' => $value,
-            'naira' => $value * $rate
-        ];
-    }
-
-
+        // Calculate conversions
+        $conversions = [];
+        foreach ($dollarValues as $value) {
+            $conversions[] = [
+                'dollar' => $value,
+                'naira' => $value * $rate
+            ];
+        }
 
         return view('index', compact('currencies','ExchangeRate', 'conversions'));
     }
+
+
+    public function zzconvert($from, $amount)
+    {
+       
+
+        $Currency =Currency::where('code',$from)->value('id');
+
+        $exchangeRate = ExchangeRate::with(['currency'])
+        ->where('currency_id', $Currency)
+        ->where('provider', 'Black Market')
+        ->first();
+
+        if ($exchangeRate) {
+            $rate = $exchangeRate->rate;
+            $conversion = [
+                'amount' => $amount,
+                'naira' => $amount * $rate,
+                'rate' => $rate,
+                'code' => $exchangeRate->currency->code, // Access the related currency model
+                'name' => $exchangeRate->currency->name,
+            ];
+
+
+
+        }
+
+        return view('currency', compact('conversion'));
+    }
+
+
+    public function convert($amount)
+    {
+        $exchangeRate = 750; // Replace this with your actual dynamic exchange rate source
+
+        $rate = ExchangeRate::with(['currency'])
+        ->where('id', 2)
+        ->where('provider', 'Black Market')
+        ->value('rate');
+
+        $conversion = [
+            'dollar' => $amount,
+            'naira' => $amount * $rate,
+            'rate' =>$rate,
+            'name'=> $rate->currency->name,
+
+        ];
+
+        return view('currency', compact('conversion'));
+    }
+
 
     // Show all currencies
     public function index()
@@ -90,10 +139,12 @@ class CurrencyController extends Controller
 
     public function getRate($currency)
     {
-        $rate = ExchangeRate::where('currency_id', $currency)->first();
+        $rate = ExchangeRate::with(['currency'])->where('currency_id', $currency)->first();
 
+
+        // dd($rate);
         if ($rate) {
-            return response()->json(['success' => true, 'rate' => $rate->rate]);
+            return response()->json(['success' => true,'currency'=>$rate->currency->code, 'rate' => $rate->rate]);
         }
 
         return response()->json(['success' => false, 'message' => 'Currency not found'], 404);

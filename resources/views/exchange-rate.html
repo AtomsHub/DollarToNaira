@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Meta tag -->
+        <meta charset="UTF-8">
+        <meta name="author" content="" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="assets/img/favicons/favicon.png" />
+        <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="assets/img/favicons//apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="assets/img/favicons/apple-touch-icon-114x114.png" />
+
+        <!-- Title -->
+        <title>Exchange - Home</title>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Data Table CSS -->
+        <link href="assets/css/datatables.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+
+        <!-- Custom CSS -->
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="assets/css/responsive.css" rel="stylesheet">
+        <style>
+            .select2-container .select2-selection__rendered {
+              line-height: auto !important; 
+            }
+            .currency-field {
+                border: 1px solid rgba(51, 51, 51, .1);
+                height: 48px;
+                border-radius: .375rem;
+                overflow: hidden;
+                background-color: #fff;
+                display: flex;
+                align-items: center;
+            }
+            .currency-field .amount-field {
+                border: 0;
+                border-radius: 0.25rem 0 0 0.25rem;
+                font-size: 1.125rem;
+                line-height: 1.5rem;
+                height: auto;
+                padding: 0.25rem 1rem;
+                z-index: 2;
+            }
+
+            .currency-field .amount-field:focus {
+                border: none;
+                outline: 0;
+                box-shadow: none;
+            }
+
+            .select2-container--default .select2-selection--single {
+                background-color: #fff;
+                border: none;
+                border-radius: none;
+                margin-right: 5px;
+            }
+
+            .currency-selector {
+                min-width: 130px !important;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- Header Starts -->
+        <header class="">
+            <nav class="navbar navbar-dark navbar-expand-lg d-flex justify-content-between align-items-center py-4 px-3 px-md-5">
+                <div class="nav-logo d-flex align-items-center justify-content-between">
+                    <span class="nav-logo_text ms-2">Exchange logo</span>
+                </div>
+                <div class="d-flex gap-3 align-items-center">
+                    <a href="" class="d-flex">
+                        <img src="assets/img/svg/search.svg" alt="" />
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="blog.html">Blog</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <!-- Header Ends -->        
+
+        <!-- Hero Starts -->
+        <div class="hero">
+            <div class="container">
+                <div class="row align-items-center hero-content">
+        
+                    <!-- Hero Text -->
+                    <div class="px-md-5 px-lg-0 text-center myy-4 my-md-5">
+                        <h1 class="hero-content_heading display-6 mb-0 ">
+
+                            ₦{{ number_format($conversion['naira'], 2) }} 
+                            10 GBP to NGN - Convert Pound Sterling to Nigerian Naira
+                        </h1>
+        
+                        <p class="hero-content_paragraph fs-4 mt-3">
+                            Convert GBP to NGN using our currency converter with real exchange rate today
+                        </p> 
+                    </div>
+    
+                    <!-- Hero Table -->
+                    <div class="px-3">
+                        <div class="border p-3 p-md-5 mt-3 rounded">
+                            <form action="">
+                                <div class="row justify-content-between">
+                                    <div class="col-12 col-lg">
+                                        <label for="amountCurrency">Amount</label>
+                                        <div class="currency-field">
+                                            <input type="number" class="form-control amount-field">
+                                            <select class="form-select currency-selector w-auto" id="amountCurrency" name="amountCurrency"></select>
+                                        </div>
+                                    </div>
+  
+                                    <div class="col-auto">
+                                        <!-- You can add any additional content here -->
+                                    </div>
+    
+                                    <div class="col-12 col-lg">
+                                        <label for="convertedCurrency">Converted To</label>
+                                        <div class="currency-field">
+                                            <input type="number" class="form-control amount-field">
+                                            <select class="form-select currency-selector w-auto" id="convertedCurrency" name="convertedCurrency"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>  
+
+                            <div class="mt-4">
+                                <h5 class="fw-bold">1 GBP = 2,072.59 NGN</h5>
+                                <p class="fs-5">1 NGN = 0 GBP</p>
+                                <p class="fw-light" style="color: #6a7175;">(Mid-market exchange rate)</p>
+
+                                <p class="mt-3">Last updated Dec 05, 2024 15:58 GMT</p>
+                            </div>
+                        </div>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+        <!-- Hero Ends -->
+
+        <section class="bg-white px-3 px-md-0">
+            <div class="container">
+                <div class="mb-4">
+                    <h3 class="fw-semibold">What is the Pound Sterling worth against the Nigerian Naira today?</h3>
+                    <p class="mt-2">1 GBP is worth 2,072.59 NGN today</p>
+                </div>
+    
+                <div class="mb-4">
+                    <h3 class="fw-semibold">How much is 1,000 GBP worth in NGN?</h3>
+                    <p class="mt-2">At the current exchange rate of 2,072.59 , a sum of 1,000 Pound Sterling is worth 2,072,590 Nigerian Naira.</p>
+                </div>
+    
+                <div class="mb-4">
+                    <h3 class="fw-semibold">Which currency is stronger? GBP or NGN?</h3>
+                    <p class="mt-2">The Pound Sterling is currently stronger than the Nigerian Naira given that 1 GBP is equal to 2,072.59 NGN. Conversely, 1 NGN is worth 0 GBP.</p>
+                </div>
+    
+                <div class="mb-4">
+                    <h2 class="fw-bold">Overview of GBP to NGN Performance and Trends</h2>
+                    <p class="mt-2">
+                        Today, to buy 1,000 Pound Sterling, you need 2,072,590 Nigerian Naira. On the same date last year, you needed 1,011,680 Nigerian Naira for 1,000 Pound Sterling. This change indicates that the Pound Sterling has become stronger
+                        against the Nigerian Naira by 108.86% over the past year.
+                    </p>
+                    <p class="mt-2">The pair experienced high volatility of 127.96%.</p>
+                    <p class="mt-2">High volatility means there is a higher risk of significant price changes. It is better to closely monitor the exchange rate in such situations.</p>
+                </div>
+    
+                <div class="mb-4">
+                    <h2 class="fw-bold mb-3">GBP to NGN Currency Performance and Volatility</h2>
+                    <h3 class="fw-semibold">Last 7 Days</h3>
+                    <ul>
+                        <li><strong>Performance:</strong> £1,000 varied between ₦2,113.04 (weekly low) and ₦2,188.26 (weekly high), a variance of ₦75.22 .</li>
+                        <li><strong>Volatility:</strong> Fluctuated by 3.56%.</li>
+                    </ul>
+                </div>
+    
+                <div class="mb-4">
+                    <h3 class="fw-semibold">Last 30 Days</h3>
+                    <ul>
+                        <li><strong>Performance:</strong> £1,000 varied between ₦2,112.88 (30-day low) to ₦2,229.83 (30-day high), a variance of ₦116.95 .</li>
+                        <li><strong>Volatility:</strong> Fluctuated by 5.54%.</li>
+                    </ul>
+                </div>
+    
+                <div class="mb-4">
+                    <h3 class="fw-semibold">Last 90 Days</h3>
+                    <ul>
+                        <li><strong>Performance:</strong> £1,000 varied between ₦2,113.04 (90-day low) to ₦2,253.841 (90-day high), a variance of ₦140.801 .</li>
+                        <li><strong>Volatility:</strong> Fluctuated by 6.66%.</li>
+                    </ul>
+                </div>
+    
+                <div class="mb-4">
+                    <h3 class="fw-semibold">Last Year</h3>
+                    <ul>
+                        <li><strong>Performance:</strong> £1,000 ranged from ₦988.703 (yearly low) to ₦2,253.841 (yearly high), a variance of ₦1,265.138 .</li>
+                        <li><strong>Volatility:</strong> Fluctuated by 127.96%.</li>
+                    </ul>
+                </div>
+    
+                <div class="mb-4">
+                    <h2 class="fw-bold mb-3">GBP to NGN Forecast and trending</h2>
+                    <h3 class="fw-semibold">Is the Pound Sterling going up or down against the Nigerian Naira?</h3>
+                    <p class="mt-2">Today's GBP to NGN exchange rate (2,115.04) is smaller compared to yesterday's rate (2,162.88).</p>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="" id="quick_dollar">
+            <div class="container">
+                <div class="row align-items-center justify-content-between px-3 px-md-5">
+    
+                    <div class="col-md-6 mt-4">
+                      <p class="fw-semibold fs-4 text-center h2 mb-3">Conversion Rate Pound Sterling to Nigerian Naira</p>
+    
+                      <div class="quick-label p-3 mb-2">
+                        <p>1 GBP to Nigerian Naira</p>
+                        <p>₦2,072.59</p>
+                      </div>
+    
+                      <div class="quick-label p-3 mb-2">
+                        <p>5 GBP to Nigerian Naira</p>
+                        <p>₦10,362.95</p>
+                      </div>
+    
+                      <div class="quick-label p-3 mb-2">
+                        <p>10 GBP to Nigerian Naira</p>
+                        <p>₦20,725.90</p>
+                      </div>
+    
+                      <div class="quick-label p-3 mb-2">
+                        <p>20 GBP to Nigerian Naira</p>
+                        <p>₦41,451.80</p>
+                      </div>
+    
+                      <div class="quick-label p-3 mb-2">
+                        <p>25 GBP to Nigerian Naira</p>
+                        <p>₦51,814.75</p>
+                      </div>
+    
+                      <div class="quick-label p-3 mb-2">
+                        <p>50 GBP to Nigerian Naira</p>
+                        <p>₦103,629.50</p>
+                      </div>
+    
+                      <div class="quick-label p-3 mb-2">
+                        <p>100 GBP to Nigerian Naira</p>
+                        <p>₦207,259.00</p>
+                      </div>
+    
+                      <div class="quick-label p-3 mb-2">
+                        <p>250 GBP to Nigerian Naira</p>
+                        <p>₦518,147.50</p>
+                      </div>
+    
+                      <div class="quick-label p-3 mb-2">
+                        <p>500 GBP to Nigerian Naira</p>
+                        <p>₦1,036,295.00</p>
+                      </div>
+    
+                      <div class="quick-label p-3 mb-2">
+                        <p>1,000 GBP to Nigerian Naira</p>
+                        <p>₦2,072,590.00</p>
+                      </div>
+    
+                      <div class="quick-label p-3 mb-2">
+                        <p>2,000 GBP to Nigerian Naira</p>
+                        <p>₦4,145,180.00</p>
+                      </div>
+    
+                      <div class="quick-label p-3 mb-2">
+                        <p>5,000 GBP to Nigerian Naira</p>
+                        <p>₦10,362,950.00</p>
+                      </div>
+    
+                      <div class="quick-label p-3 mb-2">
+                        <p>10,000 GBP to Nigerian Naira</p>
+                        <p>₦20,725,900.00</p>
+                      </div>
+                    </div>
+    
+                    <div class="col-md-6 mt-4">
+                        <p class="fw-semibold fs-4 text-center h2 mb-3">Conversion Rate Nigerian Naira to Pound Sterling</p>
+      
+                        <div class="quick-label p-3 mb-2">
+                          <p>1 NGN to Pound Sterling</p>
+                          <p>£0.00048</p>
+                        </div>
+      
+                        <div class="quick-label p-3 mb-2">
+                          <p>5 NGN to Pound Sterling</p>
+                          <p>£0.00241</p>
+                        </div>
+      
+                        <div class="quick-label p-3 mb-2">
+                          <p>10 NGN to Pound Sterling</p>
+                          <p>£0.00482</p>
+                        </div>
+      
+                        <div class="quick-label p-3 mb-2">
+                          <p>20 NGN to Pound Sterling</p>
+                          <p>£0.00965</p>
+                        </div>
+      
+                        <div class="quick-label p-3 mb-2">
+                          <p>25 NGN to Pound Sterling</p>
+                          <p>£0.01206</p>
+                        </div>
+      
+                        <div class="quick-label p-3 mb-2">
+                          <p>50 NGN to Pound Sterling</p>
+                          <p>£0.02412</p>
+                        </div>
+      
+                        <div class="quick-label p-3 mb-2">
+                          <p>100 NGN to Pound Sterling</p>
+                          <p>£0.04825</p>
+                        </div>
+      
+                        <div class="quick-label p-3 mb-2">
+                          <p>250 NGN to Pound Sterling</p>
+                          <p>£0.12062</p>
+                        </div>
+      
+                        <div class="quick-label p-3 mb-2">
+                          <p>500 NGN to Pound Sterling</p>
+                          <p>£0.24124</p>
+                        </div>
+      
+                        <div class="quick-label p-3 mb-2">
+                          <p>1,000 NGN to Pound Sterling</p>
+                          <p>£0.48249</p>
+                        </div>
+      
+                        <div class="quick-label p-3 mb-2">
+                          <p>2,000 NGN to Pound Sterling</p>
+                          <p>£0.96498</p>
+                        </div>
+      
+                        <div class="quick-label p-3 mb-2">
+                          <p>5,000 NGN to Pound Sterling</p>
+                          <p>£2.41244</p>
+                        </div>
+      
+                        <div class="quick-label p-3 mb-2">
+                          <p>10,000 NGN to Pound Sterling</p>
+                          <p>£4.82488</p>
+                        </div>
+                      </div>  
+                </div>
+            </div>
+        </section>
+        
+
+        
+        <section class="bg-white">
+            <div class="container">
+                <h2 class="h2 text-center fw-bold mb-4">Currency information</h2>
+                <div class="row align-items-center justify-content-between px-3 px-md-0">
+                    <div class="col-md-6 mt-4">
+                        <h3 class="mb-3 fw-semibold">
+                            <span class="fi fi-gb"></span>
+                            GBP - Pound Sterling        
+                        </h3>
+                        <div>
+                            <p class="mb-3 fs-5"><span class="fw-bold">The currency code for Pound Sterling</span> is GBP. </p>
+                            <p class="mb-3 fs-5"><span class="fw-bold">The GBP currency symbol</span> is £.</p>
+                            <p class="mb-3 fs-5"><span class="fw-bold">Minor unit:</span> 1/100 = Penny</p>
+                            <p class="mb-3 fs-5"><span class="fw-bold">GBP rank by most traded currencies:</span> 4</p>
+                            <p class="mb-3 fs-5"><span class="fw-bold">Avg proportion of daily world trade volume:</span> 6.45%</p>
+                            <p class="mb-3 fs-5"><span class="fw-bold">GBP rank by strongest currencies (buying power):</span> 5</p>
+                            <p class="mb-3 fs-5"><span class="fw-bold">The Pound Sterling is the currency of 10 countries:</span> <br>United Kingdom, Bailiwick of Guernsey, Isle of Man, Jersey, Falkland Islands, Gibraltar, South Georgia and the South Sandwich Islands, Saint Helena, British Antarctic Territory, Tristan da Cunha</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4">
+                        <h3 class="mb-3 fw-semibold">
+                            <span class="fi fi-ng"></span>
+                            NGN - Nigerian Naira
+                        </h3>
+                        <div>
+                            <p class="mb-3 fs-5"><span class="fw-bold">The currency code for Nigerian Naira</span> is NGN. </p>
+                            <p class="mb-3 fs-5"><span class="fw-bold">The NGN currency symbol</span> is ₦.</p>
+                            <p class="mb-3 fs-5"><span class="fw-bold">Minor unit:</span> 1/100 = Kobo</p>
+                            <p class="mb-3 fs-5"><span class="fw-bold">NGN rank by most traded currencies:</span> Not in top 40 traded currencies</p>
+                            <p class="mb-3 fs-5"><span class="fw-bold">Avg proportion of daily world trade volume:</span> 0% (Low daily trade currency)</p>
+                            <p class="mb-3 fs-5"><span class="fw-bold">NGN rank by strongest currencies (buying power):</span> 121</p>
+                            <p class="mb-3 fs-5"><span class="fw-bold">The Nigerian Naira is the currency of 1 countries:</span> <br>Nigeria</p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </section>
+
+        <section class="px-3 px-md-0">
+            <div class="container">
+                <div class="mb-4">
+                    <h2 class="fw-bold">Understanding GBP to NGN Currency Exchange: Our Top Tips</h2>
+                    <p class="mt-2">
+                        Let's look at some practical information, ideas and tips to help you make sure you can get the most from your money when you convert Pound Sterling to Nigerian Naira, to send a payment, for a trip overseas, when shopping online
+                        or to hold a balance in Nigerian Naira.
+                    </p>
+                </div>
+
+                <div class="mb-4">
+                    <h2 class="fw-bold">How to convert GBP to NGN?</h2>
+                    <p class="mt-2">
+                        You can convert Pound Sterling to Nigerian Naira either in a physical location or online. If you choose to exchange money at a currency exchange store, bank or at the airport, you'll be given your Nigerian Naira in cash. Or, you
+                        can choose to convert digitally, to send a payment overseas for example.
+                    </p>
+                    <p class="mt-2">If you're exchanging money in a physical location you'll usually need to take the following steps:</p>
+                    <ul class="mt-2">
+                        <li>Choose an exchange service that suits your needs</li>
+                        <li>Head there with the money in Pound Sterling cash to exchange</li>
+                        <li>Get a quote for the exchange rate and any commission or fee you need to pay</li>
+                        <li>Hand over your money and receive your Nigerian Naira in cash</li>
+                    </ul>
+                    <p class="mt-2">Exchanging your money digitally is often easier. As an example, here's how to send a payment overseas:</p>
+                    <ul class="mt-2">
+                        <li>Choose an international payment service that suits your needs and head to their desktop site, or download their app</li>
+                        <li>Tap Send Payment</li>
+                        <li>Enter the amount in Pound Sterling you want to send, or the amount in Nigerian Naira you want your recipient to get in the end</li>
+                        <li>You'll be shown a quote for the exchange rate and any commission or fee you need to pay</li>
+                        <li>Choose your preferred payment method, and follow the prompts to pay</li>
+                        <li>Your money will be deposited to your recipient's bank account directly, in Nigerian Naira</li>
+                    </ul>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="fw-semibold">How to get the best GBP to NGN exchange rate?</h3>
+                    <p class="mt-2">Because banks, currency exchange offices and international payment services all set their own exchange rates, you'll need to shop around a little to find the best GBP to NGN exchange rate for your specific transaction.</p>
+                    <p class="mt-2">
+                        Get to know the GBP/NGN mid-market exchange rate using reputable currency conversion tools, so you'll be able to see how the market is trending. You can often set up rate alerts so the service you choose will send you a message
+                        when the GBP/NGN mid-market exchange rate hits your preferred level. Once you see a rate you like, act fast to complete your transaction before markets move again.
+                    </p>
+                    <p class="mt-2">
+                        Another smart option is to open a multi-currency account which lets you hold a selection of major world currencies, often including Pound Sterling and Nigerian Naira. This can be helpful if you transact internationally often,
+                        live overseas, receive payments from abroad, invest in diverse markets or even if you simply love to shop online with international retailers. Because you can hold a balance in the currency or currencies of your choice, there's
+                        no need to convert from one currency to another unnecessarily - you can wait until exchange rates are favorable to avoid losing out.
+                    </p>
+                </div>
+                
+                <div class="mb-4">
+                    <h3 class="fw-semibold">How to buy Pound Sterling with Nigerian Naira?</h3>
+                    <p class="mt-2">
+                        You'll be able to exchange Nigerian Naira to Pound Sterling in the same way as you'd exchange Pound Sterling to Nigerian Naira. If you have Nigerian Naira in your pocket in cash, you can take them along to a currency exchange
+                        service and ask if they'll buy back in exchange for Nigerian Naira. Be aware that the exchange rate might not be great - so coming back from a trip with as little foreign cash as possible is a smart plan.
+                    </p>
+                    <p class="mt-2">
+                        On the other hand, if you hold Pound Sterling in a bank or specialist provider account, you'll be able to take advantage of online currency exchange services which can often offer fast, efficient and good value conversion which
+                        uses a better rate than a bank would.
+                    </p>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="fw-semibold">Where to exchange GBP to NGN?</h3>
+                    <p class="mt-2">
+                        You can exchange currencies in person at a currency exchange store, bank or airport, or use an online service instead. It's helpful to know that in person currency exchange options can offer a pretty poor deal overall, as
+                        exchange rates commonly include a markup - an extra fee. If you're exchanging somewhere with little local competition - like at an airport or hotel, for example - the chances are that the rate you get will be even worse.
+                    </p>
+                    <p class="mt-2">
+                        A good alternative is to open a multi-currency account which lets you hold and exchange currencies digitally - and if you pick an account which also offers a linked debit card, you can make ATM withdrawals at home and abroad
+                        whenever you need cash. Digital specialist services can often offer a better exchange rate with lower overall costs compared to using your bank or exchanging cash in person - plus they're intuitive to use and let you manage your
+                        money with just your phone.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Start FAQ -->
+        <section class="bg-white faq">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-12 text-center">
+                        <h2 class="title mb-2 mb-md-5 fw-semibold fs-1">Frequently Asked Questions</h2>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row row-cols-1 gap-3 my-4">
+                            <div class="col">
+                                <div class="accordion" id="faqAccordion">
+
+                                    <div class="accordion-item mb-3">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed p-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq-one" aria-expanded="false" aria-controls="faq-one">
+                                                How much is the Pound Sterling to Nigerian Naira?
+                                            </button>
+                                        </h2>
+                                        <div id="faq-one" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                The Pound Sterling to Nigerian Naira exchange rate today is 2,072.59 . Use this guide to learn more about exchanging GBP to NGN in the easiest and best value way for your specific needs.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion-item mb-3">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed p-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq-two" aria-expanded="false" aria-controls="faq-two">
+                                                How much is 1,000 Pound Sterling to the Nigerian Naira?
+                                            </button>
+                                        </h2>
+                                        <div id="faq-two" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                The GBP to NGN rate today is 2,072.59 . That means that 1,000 Pound Sterling would be worth 2,072,590 Nigerian Naira.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion-item mb-3">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed p-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq-three" aria-expanded="false" aria-controls="faq-three">
+                                                How to exchange Pound Sterling to Nigerian Naira?
+                                            </button>
+                                        </h2>
+                                        <div id="faq-three" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                Exchange GBP to NGN in person at a bank, currency exchange store or airport - or for a better exchange rate and to avoid standing in line in a physical store, use a digital service. Online currency exchange services are safe, intuitive and easy to use, to send payments internationally, or hold and exchange multiple currencies including GBP to NGN.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion-item mb-3">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed p-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq-four" aria-expanded="false" aria-controls="faq-four">
+                                                How to send money to Nigeria?
+                                            </button>
+                                        </h2>
+                                        <div id="faq-four" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                If you want to send money from United Kingdom - or anywhere else in the world - to Nigeria, you'll be able to do so through your bank or an online specialist service like Wise. Specialist international money transfer services can often offer better exchange rates and lower overall costs for payments to Nigeria - plus, you'll be able to get everything arranged with just your laptop or phone.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion-item mb-3">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed p-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq-five" aria-expanded="false" aria-controls="faq-five">
+                                                What is the Mid-Market Rate?
+                                            </button>
+                                        </h2>
+                                        <div id="faq-five" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                The mid-market exchange rate is the rate that banks and currency exchange services get when they buy and sell currencies like Nigerian Naira and Pound Sterling on wholesale markets. It's an important benchmark you can use to measure whether the exchange rate you're offered by a bank or exchange service is fair.
+                                                <span class="d-block mt-2">Usually banks and exchange services add a percentage margin - known as a markup - to the exchange rate they get themselves. But this markup can vary a lot, and in some cases pushes up the cost of currency exchange significantly. Learning about the mid-market rate and monitoring it can mean you get a better deal when you exchange currencies.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h6 class="text-center">Get the live Pound Sterling to Nigerian Naira exchange rate with our handy tools, to help you compare your options.</h6>
+                </div>
+            </div>
+        </section>
+        <!-- Ends FAQ -->
+
+        <section class="px-3 px-md-0">
+            <div class="container">
+                <h3 class="fw-bold mb-3">Why trust us?</h3>
+                <p>
+                    We take reader trust seriously. At Currency Live we're working to help our readers learn more about currency exchange so they can avoid the common pitfalls and make more of their money. Here's why you can trust us to do just
+                    that:&gt;
+                </p>
+
+                <div class="d-flex gap-4 mt-4">
+                    <div>
+                        <img width="80" height="80" src="/assets/img/icon-expertise.jpg" />
+                    </div>
+                    <div>
+                        <span class="fw-bold">Expertise and Transparency by our partnership with Wise</span>
+                        <p>
+                            Our partnership with Wise reinforces our commitment to delivering transparent and reliable financial insights and aiding more than millions of monthly users in their money transfers. We already have a billion impressions
+                            and over a million yearly visitors who benefit from the depth of insight and actionable tips we can provide them.
+                        </p>
+                    </div>
+                </div>
+                <div class="d-flex gap-4 mt-4">
+                    <div>
+                        <img width="80" height="80" src="/assets/img/icon-marketScope.jpg" />
+                    </div>
+                    <div>
+                        <span class="fw-bold">Broad market scope</span>
+                        <p>At Currency Live we cover all of currency pairs, with rates which are refreshed in real time so you'll know the details you're reading are accurate, extensive and live.</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-4 mt-4">
+                    <div>
+                        <img width="80" height="80" src="/assets/img/icon-reliable.jpg" />
+                    </div>
+                    <div>
+                        <span class="fw-bold">Reliable Market Analysis</span>
+                        <p>Our market analysis and currency news are up-to-date, researched and presented in an easy-to-understand format. This ensures you get accurate and actionable information, without any unnecessary complexities.</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-4 mt-4">
+                    <div>
+                        <img width="80" height="80" src="/assets/img/icon-commitment.jpg" />
+                    </div>
+                    <div>
+                        <span class="fw-bold">Commitment to Accurate Currency Information</span>
+                        <p>
+                            Currency Live was built by currency exchange experts with over 10 years experience, and we are proud to dedicate ourselves to providing essential and current information, aiding users with valuable insights for currency
+                            conversion and financial decision-making.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <footer>
+            <div class="d-md-flex justify-content-between align-items-center p-3 p-md-4">
+                <p>©2024 DollartoNaira NG</p>
+                <ul class="navbar-nav flex-row gap-3 flex-wrap">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About US</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Disclaimer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Terms and Condition</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Privacy Policy</a>
+                    </li>
+                    
+                </ul>
+
+            </div>
+        </footer>
+
+
+        
+        
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+         <!-- Data Table JS-->
+         <script src="assets/js/datatables.min.js"></script>
+         
+         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+       
+        <!-- Custom JS -->
+        <script src="js/main.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const currencies = [
+                { code: "USD", name: "Dollar", flag: "us" },
+                { code: "GBP", name: "Pound Sterling", flag: "gb" },
+                { code: "EUR", name: "Euro", flag: "eu" },
+                { code: "JPY", name: "Yen", flag: "jp" }
+              ];
+    
+              // Get all elements with the class 'currency-selector'
+              const selectors = document.querySelectorAll('.currency-selector');
+    
+              selectors.forEach(selector => {
+                currencies.forEach(currency => {
+                  const option = document.createElement('option');
+                  option.value = currency.code;
+                  option.setAttribute('data-flag', currency.flag);
+                  option.innerHTML = `<span class="fi fi-${currency.flag}"></span> ${currency.name} (${currency.code})`;
+                  selector.appendChild(option);
+                });
+    
+                // Initialize select2 for each selector
+                $(selector).select2({
+                  templateResult: formatState,
+                  templateSelection: formatState
+                });
+              });
+    
+              function formatState(state) {
+                if (!state.id) {
+                  return state.text;
+                }
+                const span = document.createElement('span');
+                span.innerHTML = `<span class="fi fi-${state.element.dataset.flag}"></span> ${state.text}`;
+                return span;
+              }
+            });
+            </script>
+    
+    
+    
+        
+    </body>
+</html>

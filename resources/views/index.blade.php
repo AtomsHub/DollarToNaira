@@ -207,19 +207,16 @@
         <section class="bg-white" id="quick_dollar">
             <div class="row align-items-center justify-content-center px-3 px-md-0">
                 <div class="col-md-8 text-center">
-                    <p class="h2 fw-semibold fs-1 mb-2 mb-md-5">Quick Dollar to Naira Conversion</p>
+                    <p class="h2 fw-semibold fs-1 mb-2 mb-md-5">Quick Conversion</p>
                 </div>
         
                 <div class="col-lg-9 col-md-11 mt-4">
-                    @foreach($conversions as $conversion)
-                        <div class="quick-label p-3 p-md-4">
-                            <p>{{ $conversion['dollar'] }} Dollars to Nigeria Naira</p>
-                            <p>₦{{ number_format($conversion['naira'], 2) }}</p>
-                        </div>
-                    @endforeach
+                    <!-- Dynamic content goes here -->
                 </div>
             </div>
         </section>
+        
+        
         
         <!-- Quick Dollar End -->
 
@@ -580,20 +577,21 @@
         </script>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+                document.addEventListener('DOMContentLoaded', function () {
                 const frmCurrency = document.getElementById('frmCurrency');
                 const amountInput = document.getElementById('Amount');
                 const convertedAmount = document.getElementById('convertedAmount');
-                const exchangeRateLabel = document.getElementById('exchangeRate');
-                const fromCurrencyLabel = document.getElementById('fromCurrencyLabel');
-                const toCurrencyLabel = document.getElementById('toCurrencyRateLabel');
+                const quickDollarSection = document.getElementById('quick_dollar');
 
-                async function fetchRate(currencyCode) {
+                async function fetchRate(currencyCode, targetCurrency = 'NGN') {
                     try {
-                        const response = await fetch(`/api/exchange-rate/${currencyCode}`);
+                        const response = await fetch(`/api/exchange-rate/${currencyCode}/${targetCurrency}`);
                         const data = await response.json();
                         if (data.success) {
-                            return data.rate;
+                            return {
+                                rate: data.rate,
+                                currency: data.currency, 
+                            };
                         } else {
                             console.error(data.message);
                             return null;
@@ -608,19 +606,51 @@
                     const amount = parseFloat(amountInput.value) || 0;
                     const currencyCode = frmCurrency.value;
 
-                    const rate = await fetchRate(currencyCode);
-                    if (rate) {
+                    const result = await fetchRate(currencyCode);
+                    if (result) {
+                        const { rate, currency } = result;
                         const convertedValue = amount * rate;
                         convertedAmount.textContent = convertedValue.toFixed(2);
-                        exchangeRateLabel.textContent = rate.toFixed(2);
-                        fromCurrencyLabel.textContent = amount+ ` ${currencyCode} = `;
-                        toCurrencyLabel.textContent = rate+"dd Naira (NGN)";
                     }
+
+                    // Update the Quick Dollar Section
+                    await updateQuickDollar(currencyCode);
+                }
+
+                async function updateQuickDollar(selectedCurrency) {
+                    const rates = await fetchRate(selectedCurrency);
+                    if (rates) {
+                        const conversions = [1, 5, 10, 15, 20, 25, 30, 37, 40,45,50,60,70,100,150,200,250,300,400,500,700,1000,1500,2000,3000]; // Example amounts
+
+                        const { rate, currency } = rates;
+                        let content = conversions.map(dollar => {
+                            const nairaValue = dollar * rate;
+                            return `
+                                <div class="quick-label p-3 p-md-4">
+                                    <p>
+                                        <a href="/${currency}-NGN-${dollar}" class="text-decoration-none">
+                                            ${dollar} ${currency} to Nigerian Naira
+                                        </a>
+                                    </p>
+                                    <p>₦${nairaValue.toFixed(2)}</p>
+                                </div>`;
+                        }).join('');
+                        quickDollarSection.querySelector('.col-lg-9').innerHTML = content;
+                    }
+                }
+
+                async function setDefaultConversion() {
+                    frmCurrency.value = '1'; // Ensure the default value is "USD"
+                    amountInput.value = 1; // Default to 1 unit
+                    await updateConversion();
                 }
 
                 // Attach event listeners
                 frmCurrency.addEventListener('change', updateConversion);
                 amountInput.addEventListener('input', updateConversion);
+                setDefaultConversion();
+
+                
             });
         </script>
 

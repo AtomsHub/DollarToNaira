@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [CurrencyController::class, 'MAININDEX'])->name('index');
+Route::get('/{amount}-usd-to-ngn', [CurrencyController::class, 'convert'])->name('usd.to.ngn');
 
 
 
@@ -28,8 +29,12 @@ Route::get('/', [CurrencyController::class, 'MAININDEX'])->name('index');
 // // Route definition for updating a currency
 // Route::put('/dashboard/currencies/{id}', [CurrencyController::class, 'update'])->name('currencies.update');
 
+Route::get('/api/exchange-rate/{from}/{to}', [CurrencyController::class, 'getRate']);
 
-Route::get('/api/exchange-rate/{currency}', [CurrencyController::class, 'getRate'])->name('api.exchangeRate');
+Route::get('/{from}-NGN-{amount}', [CurrencyController::class, 'zzconvert'])->name('currency.convert');
+
+
+// Route::get('/api/exchange-rate/{currency}', [CurrencyController::class, 'getRate'])->name('api.exchangeRate');
 Route::prefix('dashboard')->group(function () {
     Route::get('/', [CurrencyController::class, 'dashboardindex'])->name('dashboardindex.index');
 
