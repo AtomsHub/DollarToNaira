@@ -279,9 +279,9 @@
                     </div>
                     <div class="modal-body mx-1 mx-md-3 row justify-content-center">
                         <div class="modal-form">
-                            <form action="{{ route('exchange-rates.update', ['id' => $rate->id]) }}" method="POST">
+                            <form id="editCurrencyForm">
                                 @csrf
-                                @method('PUT')
+                              
                                
 
                                 <div class="text-start mb-3">
@@ -323,34 +323,7 @@
 
         <!-- Custom JS -->
         <script src="../assets/js/main.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const payoutLink = document.getElementById('payoutLink');
-                const receivedLink = document.getElementById('receivedLink');
-                const payoutDiv = document.getElementById('payoutDiv');
-                const receivedDiv = document.getElementById('receivedDiv');
-
-                payoutLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (payoutDiv.classList.contains('d-none')) {
-                        payoutDiv.classList.remove('d-none');
-                        receivedDiv.classList.add('d-none');
-                        payoutLink.classList.toggle('active');
-                        receivedLink.classList.remove('active');
-                    } 
-                });
-
-                receivedLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (receivedDiv.classList.contains('d-none')) {
-                        receivedDiv.classList.remove('d-none');
-                        payoutDiv.classList.add('d-none');
-                        receivedLink.classList.toggle('active');
-                        payoutLink.classList.remove('active');
-                    } 
-                });
-            });
-        </script>
+        
 
         <script>
             // Pre-fill the modal with the data when edit button is clicked
@@ -363,6 +336,60 @@
                 modal.find('#edit_currencyName').val(button.data('currency_name'));
                 modal.find('#edit_ratePerNaira').val(button.data('rate'));
 
+            });
+
+
+
+            $(document).ready(function () {
+                // Populate the modal with data
+                $(".edit-btn").on("click", function () {
+                    const id = $(this).data("id");
+                    const currencyId = $(this).data("currency-id");
+                    const name = $(this).data("currency-name");
+                    const buy = $(this).data("buy");
+                    const sell = $(this).data("sell");
+
+                    $("#editCurrencyId").val(id);
+                    $("#editCurrencyName").val(name);
+                    $("#editBuyRate").val(buy);
+                    $("#editSellRate").val(sell);
+                });
+
+                // Handle form submission
+                $("#editCurrencyForm").on("submit", function (e) {
+                    e.preventDefault();
+
+                    const id = $("#editCurrencyId").val();
+                    const buy = $("#editBuyRate").val();
+                    const sell = $("#editSellRate").val();
+                    const url = `currencies/update`; // Adjust your route as needed
+
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id: id,
+                            buy: buy,
+                            sell: sell,
+                        },
+                        success: function (response) {
+                            // Update the table row with the new data
+                            $(`#currencyBuy-${id}`).text(response.buy);
+                            $(`#currencySell-${id}`).text(response.sell);
+
+                            // Close the modal
+                            $("#editCurrencyModal").modal("hide");
+
+                            // Optionally, display a success message
+                            // alert("Currency updated successfully!");
+                            location.reload();
+                        },
+                        error: function (xhr) {
+                            alert("An error occurred. Please try again.");
+                        },
+                    });
+                });
             });
         </script>
 

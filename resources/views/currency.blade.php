@@ -104,6 +104,51 @@
         </header>
         <!-- Header Ends -->        
 
+
+        <section class="" id="exchange">
+            <div class="row align-items-center justify-content-center">
+
+                <div class="col-md-8 text-center">
+                    <p class="exchange-header">Fast, Reliable Currency Conversions</p>
+                    <p class="exchange-sub_header">Get Instant Exchange Rates for Any Currency of our choice</p>
+                </div>
+
+                <div class="col-lg-9 col-md-11 exchange-card p-5">
+                    <p class="mb-5">Quick Conversion</p>
+                    <div class="row row-cols row-cols-1 row-cols-md-3 gy-4">
+                        <div class="col">
+                            <label for="frmCurrency">From Currency</label>
+                            <select class="form-select" id="frmCurrency" name="frmCurrency">
+                               
+                                @foreach (\App\Models\Currency::has('exchangeRates')->get(); as $currencyhh)
+                                    <option value="{{ $currencyhh->id }}">{{ $currencyhh->symbol }} {{ $currencyhh->name }}</option>
+                                   
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="Amount">Amount to convert</label>
+                            <input type="number" name="Amount" id="Amount" class="form-control" placeholder="Enter amount">
+                        </div>
+                        
+                        <div class="col text-center mt-5">
+                            <p class="exchange-coversion mb-2">
+                                <span class="fw-light" id="convertedAmount">0</span>
+                                <span class="fw-semibold" id="toCurrencyLabel">Nigerian Naira (NGN)</span>
+                            </p>
+                            {{-- <p class="exchange-coversion_rate">
+                                <span id="exchangeRate">1</span>
+                                <span id="fromCurrencyLabel">USD = </span>
+                                <span id="toCurrencyRateLabel">Naira (NGN)</span>
+                            </p> --}}
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
         <!-- Hero Starts -->
       
         <!-- Hero Ends -->
@@ -561,7 +606,87 @@
                 return span;
               }
             });
-            </script>
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const frmCurrency = document.getElementById('frmCurrency');
+            const amountInput = document.getElementById('Amount');
+            const convertedAmount = document.getElementById('convertedAmount');
+            const quickDollarSection = document.getElementById('quick_dollar');
+
+            async function fetchRate(currencyCode, targetCurrency = 'NGN') {
+                try {
+                    const response = await fetch(`/api/exchange-rate/${currencyCode}/${targetCurrency}`);
+                    const data = await response.json();
+                    if (data.success) {
+                        return {
+                            rate: data.rate,
+                            currency: data.currency, 
+                        };
+                    } else {
+                        console.error(data.message);
+                        return null;
+                    }
+                } catch (error) {
+                    console.error('Error fetching exchange rate:', error);
+                    return null;
+                }
+            }
+
+            async function updateConversion() {
+                const amount = parseFloat(amountInput.value) || 0;
+                const currencyCode = frmCurrency.value;
+
+                const result = await fetchRate(currencyCode);
+                if (result) {
+                    const { rate, currency } = result;
+                    const convertedValue = amount * rate;
+                    convertedAmount.textContent = convertedValue.toFixed(2);
+                }
+
+                // Update the Quick Dollar Section
+                await updateQuickDollar(currencyCode);
+            }
+
+            async function updateQuickDollar(selectedCurrency) {
+                const rates = await fetchRate(selectedCurrency);
+                if (rates) {
+                    const conversions =[1, 5, 10, 20, 25, 50, 100, 250, 500, 1000, 2000, 5000, 10000]; // Example amounts
+
+                    const { rate, currency } = rates;
+                    let content = conversions.map(dollar => {
+                        const nairaValue = dollar * rate;
+
+                    
+                        return `
+                            <div class="quick-label p-3 p-md-4">
+                                <p>
+                                    <a href="/${currency}-NGN-${dollar}" class="text-decoration-none">
+                                        ${dollar} ${currency} to Nigerian Naira
+                                    </a>
+                                </p>
+                                <p>₦${nairaValue.toFixed(2)}</p>
+                            </div>`;
+                    }).join('');
+                    quickDollarSection.querySelector('.col-lg-9').innerHTML = content;
+                }
+            }
+
+            async function setDefaultConversion() {
+                frmCurrency.value = '1'; // Ensure the default value is "USD"
+                amountInput.value = 1; // Default to 1 unit
+                await updateConversion();
+            }
+
+            // Attach event listeners
+            frmCurrency.addEventListener('change', updateConversion);
+            amountInput.addEventListener('input', updateConversion);
+            setDefaultConversion();
+
+            
+        });
+        </script>
     
     
     
