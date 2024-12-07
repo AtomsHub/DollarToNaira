@@ -11,15 +11,10 @@ use Illuminate\Support\Facades\Session;
 
 class CurrencyController extends Controller
 {
-
-    
     public function dashboardindex()
     {
           return view('dashboard.index');
     }
-
-
-
     public function MAININDEX()
     {
         $currencies = Currencyrates::all();
