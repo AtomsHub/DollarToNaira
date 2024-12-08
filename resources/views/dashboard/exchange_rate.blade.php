@@ -172,47 +172,48 @@
                                     <tr class="table-light text-center">
                                         <th>#</th>
                                         <th>Provider</th>
-                                        <th>Currency </th>
-                                    
+                                        <th>Currency</th>
                                         <th>Rate/Naira</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($exchangeRates as $rate)
-                                        <tr>
+                                        <tr id="rateRow-{{ $rate->id }}">
                                             <td>{{ $loop->iteration }}</td>
-                                           
                                             <td>
-                                                @if ($rate->provider=="CBN")
+                                                @if ($rate->provider == "CBN")
                                                     <img src="../assets/img/image.png" height="25" width="auto" alt="">
                                                 @else
                                                     <img src="../assets/img/image (1).png" height="25" width="auto" alt="">
                                                 @endif
                                                 {{ $rate->provider }}
                                             </td>
-                                            
-                                            <td>{{ $rate->currency->symbol }} {{ $rate->currency->code }} {{ $rate->currency->name }}</td>
-                                            <td>₦{{ number_format($rate->rate, 2) }}</td>
+                                            <td id="currencyName-{{ $rate->id }}">
+                                                {{ $rate->currency->symbol }} {{ $rate->currency->code }} {{ $rate->currency->name }}
+                                            </td>
+                                            <td id="rate-{{ $rate->id }}">₦{{ number_format($rate->rate, 2) }}</td>
                                             <td>
-                                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editExchange"
-                                                        data-id="{{ $rate->id }}"
-                                                        data-provider="{{ $rate->provider }}"
-                                                        data-currency_name="{{ $rate->currency->symbol }} {{ $rate->currency->code }} {{ $rate->currency->name }}"   y
-                                                        data-rate="{{ $rate->rate }}">
+                                                <button type="button" class="btn btn-primary btn-sm edit-btn" 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#editExchange"
+                                                    data-id="{{ $rate->id }}"
+                                                    data-provider="{{ $rate->provider }}"
+                                                    data-currency-name="{{ $rate->currency->symbol }} {{ $rate->currency->code }} {{ $rate->currency->name }}"
+                                                    data-rate="{{ $rate->rate }}">
                                                     Edit
                                                 </button>
-                                                 <!-- Delete Button -->
-                                            <form action="{{ route('currencies.destroy', $rate->id) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                                            </form>
+                                                <form action="{{ route('currencies.destroy', $rate->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                            
                         </div>
                     </div>
                 </div>
@@ -278,37 +279,28 @@
                         <button type="button" class="btn-close mb-3 border rounded-md p-1" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body mx-1 mx-md-3 row justify-content-center">
-                        <div class="modal-form">
-                            <form id="editCurrencyForm">
-                                @csrf
-                              
-                               
-
-                                <div class="text-start mb-3">
-                                    <label for="currencyName" class="form-label fw-medium mb-1">Currency Name</label>
-                                    <input type="text" name="currency_name" id="edit_currencyName" class="form-control" value="" disabled >
-                                </div>
-                                
-                                <div class="text-start mb-3">
-                                    <label for="provider" class="form-label fw-medium mb-1">Provider</label>
-                                    <input type="text" name="provider" id="edit_provider" class="form-control" value="" disabled >
-                                </div>
-                                
-
-                                <div class="text-start mb-3">
-                                    <label for="ratePerNaira" class="form-label fw-medium mb-1">Rate/Naira</label>
-                                    <input type="number" class="form-control ps-3" name="rate" id="edit_ratePerNaira" placeholder="Enter exchange rate/naira" required>
-                                </div>
-
-                               
-
-                                <input type="submit" value="Update" class="btn btn-pay-gradient w-100 mt-3 modal-button">
-                            </form>
-                        </div>
+                        <form id="editExchangeForm">
+                            @csrf
+                            <input type="hidden" name="id" id="editExchangeId">
+                            <div class="text-start mb-3">
+                                <label for="edit_currencyName" class="form-label fw-medium mb-1">Currency Name</label>
+                                <input type="text" id="edit_currencyName" class="form-control" disabled>
+                            </div>
+                            <div class="text-start mb-3">
+                                <label for="edit_provider" class="form-label fw-medium mb-1">Provider</label>
+                                <input type="text" id="edit_provider" class="form-control" disabled>
+                            </div>
+                            <div class="text-start mb-3">
+                                <label for="edit_ratePerNaira" class="form-label fw-medium mb-1">Rate/Naira</label>
+                                <input type="number" id="edit_ratePerNaira" class="form-control ps-3" name="rate" placeholder="Enter exchange rate/naira" required>
+                            </div>
+                            <input type="submit" value="Update" class="btn btn-success w-100 mt-3 modal-button">
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+        
 
         
         
@@ -346,23 +338,26 @@
                     const id = $(this).data("id");
                     const currencyId = $(this).data("currency-id");
                     const name = $(this).data("currency-name");
-                    const buy = $(this).data("buy");
-                    const sell = $(this).data("sell");
+                    const rate = $(this).data("rate");
+                    const provider = $(this).data("provider");
 
-                    $("#editCurrencyId").val(id);
-                    $("#editCurrencyName").val(name);
-                    $("#editBuyRate").val(buy);
-                    $("#editSellRate").val(sell);
+                    $("#editExchangeId").val(id);
+                    $("#edit_currencyName").val(name);
+                    $("#edit_provider").val(buy);
+                    $("#edit_ratePerNaira").val(sell);
                 });
 
+
+           
                 // Handle form submission
-                $("#editCurrencyForm").on("submit", function (e) {
+                $("#editExchangeForm").on("submit", function (e) {
                     e.preventDefault();
 
-                    const id = $("#editCurrencyId").val();
-                    const buy = $("#editBuyRate").val();
-                    const sell = $("#editSellRate").val();
-                    const url = `currencies/update`; // Adjust your route as needed
+                    const id = $("#editExchangeId").val();
+                    const provider = $("#edit_provider").val();
+                    const ratePerNaira = $("#edit_ratePerNaira").val();
+                    const currencyName = $("#edit_currencyName").val();
+                    const url = `exchange/update`; // Adjust your route as needed
 
                     $.ajax({
                         url: url,
@@ -370,8 +365,7 @@
                         data: {
                             _token: "{{ csrf_token() }}",
                             id: id,
-                            buy: buy,
-                            sell: sell,
+                            rate: ratePerNaira,
                         },
                         success: function (response) {
                             // Update the table row with the new data

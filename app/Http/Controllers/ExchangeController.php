@@ -33,10 +33,10 @@ class ExchangeController extends Controller
    
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         // dd($request->all());
-        $currency = ExchangeRate::findOrFail($id);
+        $currency = ExchangeRate::findOrFail($request->id);
         $currency->update($request->all());
 
         return redirect()->route('exchange-rates.index')->with('success', 'Exchange rate updated successfully!');

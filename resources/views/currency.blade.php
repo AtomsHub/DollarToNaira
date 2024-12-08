@@ -158,17 +158,17 @@
             <div class="container">
                 <div class="mb-4">
                     <h3 class="fw-semibold">What is the {{ $conversion['name'] }} worth against the Nigerian Naira today?</h3>
-                    <p class="mt-2">1 {{ $conversion['code'] }} is worth  ₦{{ number_format($conversion['rate'], 2) }}  NGN today</p>
+                    <p class="mt-2">1 {{ $conversion['code'] }} is worth  ₦{{ number_format($conversion['blackMarketRate'], 2) }}  NGN today</p>
                 </div>
     
                 <div class="mb-4">
                     <h3 class="fw-semibold">How much is {{ $conversion['amount'] }}  {{ $conversion['code'] }} worth in NGN?</h3>
-                    <p class="mt-2">At the current exchange rate of ₦{{ number_format($conversion['rate'], 2) }} , a sum of  {{ $conversion['amount'] }} {{ $conversion['name'] }} is worth ₦ {{ number_format(1000*$conversion['rate'], 2) }} Nigerian Naira.</p>
+                    <p class="mt-2">At the current exchange rate of ₦{{ number_format($conversion['blackMarketRate'], 2) }} , a sum of  {{ $conversion['amount'] }} {{ $conversion['name'] }} is worth ₦ {{ number_format(1000*$conversion['blackMarketRate'], 2) }} Nigerian Naira.</p>
                 </div>
     
                 <div class="mb-4">
                     <h3 class="fw-semibold">Which currency is stronger? {{ $conversion['code'] }} or NGN?</h3>
-                    <p class="mt-2">The {{ $conversion['name'] }} is currently stronger than the Nigerian Naira given that 1 {{ $conversion['code'] }} is equal to ₦{{ number_format($conversion['rate'], 2) }} NGN.</p>
+                    <p class="mt-2">The {{ $conversion['name'] }} is currently stronger than the Nigerian Naira given that 1 {{ $conversion['code'] }} is equal to ₦{{ number_format($conversion['blackMarketRate'], 2) }} NGN.</p>
                 </div>
     
                 <div class="mb-4">
@@ -228,7 +228,7 @@
                 <div class="row align-items-center justify-content-between px-3 px-md-5">
     
                     <div class="col-md-6 mt-4">
-                      <p class="fw-semibold fs-4 text-center h2 mb-3">Conversion Rate {{ $conversion['name'] }} to Nigerian Naira</p>
+                      <p class="fw-semibold fs-4 text-center h2 mb-3">CBN Conversion Rate {{ $conversion['name'] }} to Nigerian Naira</p>
     
                         <div class="quick-labels">
                             @php
@@ -241,7 +241,7 @@
                                             <p>{{ $multiplier }} {{ $conversion['code'] }} to Nigerian Naira</p>
                                         </a>
                                  
-                                    <p>₦ {{ number_format($multiplier * $conversion['rate'], 2) }}</p>
+                                    <p>₦ {{ number_format($multiplier * $conversion['cbnRate'], 2) }}</p>
                                 </div>
                             @endforeach
                         </div>
@@ -249,73 +249,27 @@
                     </div>
     
                     <div class="col-md-6 mt-4">
-                        <p class="fw-semibold fs-4 text-center h2 mb-3">Conversion Rate Nigerian Naira to {{ $conversion['name'] }}</p>
+                        <p class="fw-semibold fs-4 text-center h2 mb-3">Black Market Conversion Rate {{ $conversion['name'] }} to Nigerian Naira</p>
       
-                        <div class="quick-label p-3 mb-2">
-                          <p>1 NGN to {{ $conversion['name'] }}</p>
-                          <p>£0.00048</p>
+                        <div class="quick-labels">
+                            @php
+                                $multipliers = [1, 5, 10, 20, 25, 50, 100, 250, 500, 1000, 2000, 5000, 10000];
+                            @endphp
+                            @foreach ($multipliers as $multiplier)
+                                <div class="quick-label p-3 mb-2">
+                                   
+                                        <a href="/{{ $conversion['code'] }}-NGN-{{ $multiplier }}" class="">
+                                            <p>{{ $multiplier }} {{ $conversion['code'] }} to Nigerian Naira</p>
+                                        </a>
+                                 
+                                    <p>₦ {{ number_format($multiplier * $conversion['blackMarketRate'], 2) }}</p>
+                                </div>
+                            @endforeach
                         </div>
-      
-                        <div class="quick-label p-3 mb-2">
-                          <p>5 NGN to {{ $conversion['name'] }}</p>
-                          <p>£0.00241</p>
-                        </div>
-      
-                        <div class="quick-label p-3 mb-2">
-                          <p>10 NGN to {{ $conversion['name'] }}</p>
-                          <p>£0.00482</p>
-                        </div>
-      
-                        <div class="quick-label p-3 mb-2">
-                          <p>20 NGN to {{ $conversion['name'] }}</p>
-                          <p>£0.00965</p>
-                        </div>
-      
-                        <div class="quick-label p-3 mb-2">
-                          <p>25 NGN to {{ $conversion['name'] }}</p>
-                          <p>£0.01206</p>
-                        </div>
-      
-                        <div class="quick-label p-3 mb-2">
-                          <p>50 NGN to {{ $conversion['name'] }}</p>
-                          <p>£0.02412</p>
-                        </div>
-      
-                        <div class="quick-label p-3 mb-2">
-                          <p>100 NGN to {{ $conversion['name'] }}</p>
-                          <p>£0.04825</p>
-                        </div>
-      
-                        <div class="quick-label p-3 mb-2">
-                          <p>250 NGN to {{ $conversion['name'] }}</p>
-                          <p>£0.12062</p>
-                        </div>
-      
-                        <div class="quick-label p-3 mb-2">
-                          <p>500 NGN to {{ $conversion['name'] }}</p>
-                          <p>£0.24124</p>
-                        </div>
-      
-                        <div class="quick-label p-3 mb-2">
-                          <p>1,000 NGN to {{ $conversion['name'] }}</p>
-                          <p>£0.48249</p>
-                        </div>
-      
-                        <div class="quick-label p-3 mb-2">
-                          <p>2,000 NGN to {{ $conversion['name'] }}</p>
-                          <p>£0.96498</p>
-                        </div>
-      
-                        <div class="quick-label p-3 mb-2">
-                          <p>5,000 NGN to {{ $conversion['name'] }}</p>
-                          <p>£2.41244</p>
-                        </div>
-      
-                        <div class="quick-label p-3 mb-2">
-                          <p>10,000 NGN to {{ $conversion['name'] }}</p>
-                          <p>£4.82488</p>
-                        </div>
-                      </div>  
+                        
+                        
+                       
+                     
                 </div>
             </div>
         </section>

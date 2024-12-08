@@ -48,8 +48,9 @@ Route::prefix('dashboard')->group(function () {
 
     Route::get('exchange-rates', [ExchangeController::class, 'index'])->name('exchange-rates.index');
     Route::post('exchange-rates', [ExchangeController::class, 'store'])->name('exchange-rates.store');
+    Route::post('/exchange/update', [ExchangeController::class, 'update'])->name('exchange-rates.update');
 
-    Route::put('exchange-rates/{id}', [ExchangeController::class, 'update'])->name('exchange-rates.update');
+    // Route::put('exchange-rates/{id}', [ExchangeController::class, 'update'])->name();
 
     // Route::put('exchange-rates/update', [ExchangeController::class, 'update'])->name('exchange-rates.update');
     Route::get('exchange-rates/delete/{id}', [ExchangeController::class, 'destroy'])->name('exchange-rates.delete');
