@@ -285,16 +285,16 @@
       
                         <div class="quick-labels">
                             @php
-                                $multipliers = [1, 5, 10, 20, 25, 50, 100, 250, 500, 1000, 2000, 5000, 10000];
+                                $multipliers = [ 2000, 5000, 10000,15000,25000,40000,50000,70000,85000,120000,200000,300000,500000];
                             @endphp
                             @foreach ($multipliers as $multiplier)
                                 <div class="quick-label p-3 mb-2">
                                    
                                         <a href="/{{ $conversion['code'] }}-NGN-{{ $multiplier }}" class="">
-                                            <p>{{ $multiplier }} {{ $conversion['code'] }} to Nigerian Naira</p>
+                                            <p>{{ $multiplier }} NGN  to {{ $conversion['code'] }}</p>
                                         </a>
                                  
-                                    <p>₦ {{ number_format($multiplier / $conversion['rate'], 2) }}</p>
+                                    <p>{{ $conversion['code'] }} {{ number_format($multiplier / $conversion['rate'], 2) }}</p>
                                 </div>
                             @endforeach
                         </div>
