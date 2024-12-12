@@ -33,8 +33,21 @@
         <link href="assets/css/style.css" rel="stylesheet">
         <link href="assets/css/responsive.css" rel="stylesheet">
 
-        <style>.overlay-text {
-    position: absolute;}</style>
+        <style>.
+        overlay-text {
+    position: absolute;}
+    
+    .nav-logo-link {
+                text-decoration: none; /* Removes underline */
+                color: inherit; /* Inherits text color from the parent element */
+            }
+
+            .nav-logo-link:hover,
+            .nav-logo-link:focus {
+                text-decoration: none; /* Prevents underline or color change on hover/focus */
+                color: inherit; /* Ensures no hover effect alters the color */
+            }
+    </style>
     </head>
     <body>
 

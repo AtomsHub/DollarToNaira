@@ -19,7 +19,7 @@
         {{-- ${currency}-NGN-${dollar} --}}
         <!-- Title -->
 
-        <title>Convert  -  {{$conversion['code'] }}."-"."NGN"-{{$conversion['amount'] }}</title>
+        <title>Convert-{{$conversion['code'] }}-NGN-{{$conversion['amount'] }}</title>
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,6 +73,16 @@
             .currency-selector {
                 min-width: 130px !important;
             }
+            .nav-logo-link {
+                text-decoration: none; /* Removes underline */
+                color: inherit; /* Inherits text color from the parent element */
+            }
+
+            .nav-logo-link:hover,
+            .nav-logo-link:focus {
+                text-decoration: none; /* Prevents underline or color change on hover/focus */
+                color: inherit; /* Ensures no hover effect alters the color */
+            }
         </style>
     </head>
     <body>
@@ -80,9 +90,15 @@
         <!-- Header Starts -->
         <header class="">
             <nav class="navbar navbar-dark navbar-expand-lg d-flex justify-content-between align-items-center py-4 px-3 px-md-5">
-                <div class="nav-logo d-flex align-items-center justify-content-between">
+                {{-- <div class="nav-logo d-flex align-items-center justify-content-between">
                     <span class="nav-logo_text ms-2">DollarToNaira</span>
-                </div>
+                </div> --}}
+                <a href="/" class="nav-logo-link">
+                    <div class="nav-logo d-flex align-items-center justify-content-between">
+                        <span class="nav-logo_text ms-2">DollarToNaira</span>
+                    </div>
+                </a>
+                
                 <div class="d-flex gap-3 align-items-center">
                     <a href="" class="d-flex">
                         <img src="assets/img/svg/search.svg" alt="" />
@@ -244,7 +260,7 @@
                 <div class="row align-items-center justify-content-between px-3 px-md-5">
     
                     <div class="col-md-6 mt-4">
-                      <p class="fw-semibold fs-4 text-center h2 mb-3">CBN Conversion Rate {{ $conversion['name'] }} to Nigerian Naira</p>
+                      <p class="fw-semibold fs-4 text-center h2 mb-3"> Conversion Rate {{ $conversion['name'] }} to Nigerian Naira</p>
     
                         <div class="quick-labels">
                             @php
@@ -265,7 +281,7 @@
                     </div>
     
                     <div class="col-md-6 mt-4">
-                        <p class="fw-semibold fs-4 text-center h2 mb-3">Black Market Conversion Rate {{ $conversion['name'] }} to Nigerian Naira</p>
+                        <p class="fw-semibold fs-4 text-center h2 mb-3"> Market Conversion Rate fromm Nigerian Naira to {{ $conversion['name'] }} </p>
       
                         <div class="quick-labels">
                             @php
@@ -278,7 +294,7 @@
                                             <p>{{ $multiplier }} {{ $conversion['code'] }} to Nigerian Naira</p>
                                         </a>
                                  
-                                    <p>₦ {{ number_format($multiplier * $conversion['rate'], 2) }}</p>
+                                    <p>₦ {{ number_format($multiplier / $conversion['rate'], 2) }}</p>
                                 </div>
                             @endforeach
                         </div>

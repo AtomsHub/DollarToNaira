@@ -37,6 +37,16 @@
                 background-color: transparent !important;
                 margin-top: 24px !important;
             }
+            .nav-logo-link {
+                text-decoration: none; /* Removes underline */
+                color: inherit; /* Inherits text color from the parent element */
+            }
+
+            .nav-logo-link:hover,
+            .nav-logo-link:focus {
+                text-decoration: none; /* Prevents underline or color change on hover/focus */
+                color: inherit; /* Ensures no hover effect alters the color */
+            }
         </style>
 
     </head>
@@ -45,9 +55,11 @@
         <!-- Header Starts -->
         <header class="">
             <nav class="navbar navbar-dark navbar-expand-lg d-flex justify-content-between align-items-center py-4 px-3 px-md-5">
-                <div class="nav-logo d-flex align-items-center justify-content-between">
-                    <span class="nav-logo_text ms-2">DollarToNaira</span>
-                </div>
+                <a href="/" class="nav-logo-link">
+                    <div class="nav-logo d-flex align-items-center justify-content-between">
+                        <span class="nav-logo_text ms-2">DollarToNaira</span>
+                    </div>
+                </a>
                 <div class="d-flex gap-3 align-items-center">
                     <a href="" class="d-flex">
                         <img src="assets/img/svg/search.svg" alt="" />

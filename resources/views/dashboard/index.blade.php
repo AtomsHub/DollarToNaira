@@ -32,6 +32,19 @@
         <!-- Custom CSS -->
         <link href="../assets/css/style.css" rel="stylesheet">
         <link href="../assets/css/responsive.css" rel="stylesheet">
+
+        <style>
+             .nav-logo-link {
+                text-decoration: none; /* Removes underline */
+                color: inherit; /* Inherits text color from the parent element */
+            }
+
+            .nav-logo-link:hover,
+            .nav-logo-link:focus {
+                text-decoration: none; /* Prevents underline or color change on hover/focus */
+                color: inherit; /* Ensures no hover effect alters the color */
+            }
+        </style>
     </head>
     <body class="dashboard">
 
@@ -69,9 +82,11 @@
                 
                 <div class="sidebar offcanvas-md offcanvas-end" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
                     <div class="offcanvas-header d-flex d-md-none justify-content-between mb-4 align-items-center">
-                        <div class="d-flex gap-2 align-items-center">
-                            <p class="mb-0">DollarToNaira</p>
-                        </div>
+                        <a href="/" class="nav-logo-link">
+                            <div class="nav-logo d-flex align-items-center justify-content-between">
+                                <span class="nav-logo_text ms-2">DollarToNaira</span>
+                            </div>
+                        </a>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
                       </div>
                     

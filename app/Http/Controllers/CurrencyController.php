@@ -24,10 +24,11 @@ class CurrencyController extends Controller
     {
         $currencies = Currencyrates::all();
         $ExchangeRate = ExchangeRate::all();
-        $rate = DB::table('exchange_rates')
-        ->where('id', 2)
-        ->where('provider', 'Black Market')
-        ->value('rate');
+        // $rate = DB::table('exchange_rates')
+        // ->where('id', 2)
+        // ->where('provider', 'Black Market')
+        // ->value('rate');
+        $rate = Currencyrates::with(['currency'])->where('currency_id', '1')->first();
 
             // dd($rate);
 
@@ -39,7 +40,7 @@ class CurrencyController extends Controller
         foreach ($dollarValues as $value) {
             $conversions[] = [
                 'dollar' => $value,
-                'naira' => $value * $rate
+                'naira' => $value * $rate->buy
             ];
         }
 
@@ -101,14 +102,24 @@ class CurrencyController extends Controller
     {
         $exchangeRate = 750; // Replace this with your actual dynamic exchange rate source
 
-        $rate = ExchangeRate::with(['currency'])
-        ->where('id', 2)
-        ->where('provider', 'Black Market')
-        ->value('rate');
+        // $rate = ExchangeRate::with(['currency'])
+        // ->where('id', 2)
+        // ->where('provider', 'Black Market')
+        // ->value('rate');
+
+        // $conversion = [
+        //     'dollar' => $amount,
+        //     'naira' => $amount * $rate,
+        //     'rate' =>$rate,
+        //     'name'=> $rate->currency->name,
+
+        // ];
+
+        $rate = Currencyrates::with(['currency'])->where('currency_id', '1')->first();
 
         $conversion = [
             'dollar' => $amount,
-            'naira' => $amount * $rate,
+            'naira' => $amount * $rate->buy,
             'rate' =>$rate,
             'name'=> $rate->currency->name,
 
@@ -160,12 +171,16 @@ class CurrencyController extends Controller
 
     public function getRate($currency)
     {
-        $rate = ExchangeRate::with(['currency'])->where('currency_id', $currency)->first();
+        // $rate = ExchangeRate::with(['currency'])->where('currency_id', $currency)->first();
+
+        $rate = Currencyrates::with(['currency'])->where('currency_id', '1')->first();
+
+        
 
 
         // dd($rate);
         if ($rate) {
-            return response()->json(['success' => true,'currency'=>$rate->currency->code, 'rate' => $rate->rate]);
+            return response()->json(['success' => true,'currency'=>$rate->currency->code, 'rate' => $rate->buy]);
         }
 
         return response()->json(['success' => false, 'message' => 'Currency not found'], 404);
