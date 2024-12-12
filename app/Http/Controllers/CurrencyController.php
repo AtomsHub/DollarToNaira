@@ -52,23 +52,24 @@ class CurrencyController extends Controller
        
 
         $Currency =Currency::where('code',$from)->value('id');
+        // currencyrates
 
-        $exchangeRates = ExchangeRate::with(['currency'])
+        $currencyrates = Currencyrates::with(['currency'])
         ->where('currency_id', $Currency)
-        ->get();
+        ->first();
 
 
-        $dinst = $exchangeRates->unique('currency_id')->first();
+        // $dinst = $exchangeRates->unique('currency_id')->first();
 
         // $dinst->currency->code, 
 
         // dd($dinst);
 
         // Filter the black market rate
-        $blackMarket = $exchangeRates->firstWhere('provider', 'Black Market');
+        // $blackMarket = $exchangeRates->firstWhere('provider', 'Black Market');
 
-        // Filter the CBN rate
-        $cbn = $exchangeRates->firstWhere('provider', 'CBN');
+        // // Filter the CBN rate
+        // $cbn = $exchangeRates->firstWhere('provider', 'CBN');
 
         // dd([
         //     'blackMarketRate' => $blackMarket ? $blackMarket->rate : null,
@@ -76,16 +77,16 @@ class CurrencyController extends Controller
         // ]);
       
 
-        if ($exchangeRates) {
-            $rate = $blackMarket ? $blackMarket->rate:0.00;
+        if ($currencyrates) {
+            $rate = $currencyrates->buy ? $currencyrates->buy:0.00;
             $conversion = [
                 'amount' => $amount,
                 'naira' => $amount * $rate,
-                'blackMarketRate' => $blackMarket ? $blackMarket->rate : 0.00,
-                'cbnRate' => $cbn ? $cbn->rate : 0.00,
+            
+                'rate' => $rate,
                 
-                'code' => $dinst->currency->code, // Access the related currency model
-                'name' => $dinst->currency->name,
+                'code' => $currencyrates->currency->code, // Access the related currency model
+                'name' => $currencyrates->currency->name,
             ];
 
 

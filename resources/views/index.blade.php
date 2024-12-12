@@ -628,8 +628,9 @@
                             return `
                                 <div class="quick-label p-3 p-md-4">
                                     <p>
-                                        <a href="/${currency}-NGN-${dollar}" class="text-decoration-none">
-                                            ${dollar} ${currency} to Nigerian Naira
+                                        
+                                        <a href="/${currency}-NGN-${dollar}" class="text-decoration-none"  style="color:#2772A4;"><u class="">
+                                            ${dollar} ${currency} to Nigerian Naira</u>
                                         </a>
                                     </p>
                                     <p>₦${nairaValue.toFixed(2)}</p>

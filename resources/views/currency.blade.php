@@ -15,9 +15,11 @@
         <link rel="apple-touch-icon" sizes="72x72" href="assets/img/favicons//apple-touch-icon-72x72.png" />
         <link rel="apple-touch-icon" sizes="114x114" href="assets/img/favicons/apple-touch-icon-114x114.png" />
 
-        <!-- Title -->
-        <title>Exchange - Home</title>
 
+        {{-- ${currency}-NGN-${dollar} --}}
+        <!-- Title -->
+
+        <title>Convert  -  {{$conversion['code'] }}."-"."NGN"-{{$conversion['amount'] }}</title>
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,6 +106,20 @@
         </header>
         <!-- Header Ends -->        
 
+        <section class="bg-white px-3 px-md-0">
+            <div class="container">
+                <div class="mb-4">
+                    <h3 class="fw-semibold">What is the {{ $conversion['name'] }} worth against the Nigerian Naira today?</h3>
+                    <p class="mt-2">1 {{ $conversion['code'] }} is worth  ₦{{ number_format($conversion['rate'], 2) }}  NGN today</p>
+                </div>
+    
+                <div class="mb-4">
+                    <h3 class="fw-semibold">How much is {{ $conversion['amount'] }}  {{ $conversion['code'] }} worth in NGN?</h3>
+                    <p class="mt-2">At the current exchange rate of ₦{{ number_format($conversion['rate'], 2) }} , a sum of  {{ $conversion['amount'] }} {{ $conversion['name'] }} is worth ₦ {{ number_format( $conversion['amount'] *$conversion['rate'], 2) }} Nigerian Naira.</p>
+                </div>
+            </div>
+        </section>
+
 
         <section class="" id="exchange">
             <div class="row align-items-center justify-content-center">
@@ -158,23 +174,23 @@
             <div class="container">
                 <div class="mb-4">
                     <h3 class="fw-semibold">What is the {{ $conversion['name'] }} worth against the Nigerian Naira today?</h3>
-                    <p class="mt-2">1 {{ $conversion['code'] }} is worth  ₦{{ number_format($conversion['blackMarketRate'], 2) }}  NGN today</p>
+                    <p class="mt-2">1 {{ $conversion['code'] }} is worth  ₦{{ number_format($conversion['rate'], 2) }}  NGN today</p>
                 </div>
     
                 <div class="mb-4">
                     <h3 class="fw-semibold">How much is {{ $conversion['amount'] }}  {{ $conversion['code'] }} worth in NGN?</h3>
-                    <p class="mt-2">At the current exchange rate of ₦{{ number_format($conversion['blackMarketRate'], 2) }} , a sum of  {{ $conversion['amount'] }} {{ $conversion['name'] }} is worth ₦ {{ number_format(1000*$conversion['blackMarketRate'], 2) }} Nigerian Naira.</p>
+                    <p class="mt-2">At the current exchange rate of ₦{{ number_format($conversion['rate'], 2) }} , a sum of  {{ $conversion['amount'] }} {{ $conversion['name'] }} is worth ₦ {{ number_format( $conversion['amount'] *$conversion['rate'], 2) }} Nigerian Naira.</p>
                 </div>
     
                 <div class="mb-4">
                     <h3 class="fw-semibold">Which currency is stronger? {{ $conversion['code'] }} or NGN?</h3>
-                    <p class="mt-2">The {{ $conversion['name'] }} is currently stronger than the Nigerian Naira given that 1 {{ $conversion['code'] }} is equal to ₦{{ number_format($conversion['blackMarketRate'], 2) }} NGN.</p>
+                    <p class="mt-2">The {{ $conversion['name'] }} is currently stronger than the Nigerian Naira given that 1 {{ $conversion['code'] }} is equal to ₦{{ number_format($conversion['rate'], 2) }} NGN.</p>
                 </div>
     
                 <div class="mb-4">
                     <h2 class="fw-bold">Overview of {{ $conversion['code'] }} to NGN Performance and Trends</h2>
                     <p class="mt-2">
-                        Today, to buy {{ $conversion['amount'] }} {{ $conversion['name'] }}, you need 2,072,590 Nigerian Naira. On the same date last year, you needed 1,011,680 Nigerian Naira for  {{ $conversion['amount'] }} {{ $conversion['name'] }}. This change indicates that the {{ $conversion['name'] }} has become stronger
+                        Today, to buy {{ $conversion['amount'] }} {{ $conversion['name'] }}, you need {{ number_format( $conversion['amount'] *$conversion['rate'], 2) }} Nigerian Naira. On the same date last year, you needed 1,011,680 Nigerian Naira for  {{ $conversion['amount'] }} {{ $conversion['name'] }}. This change indicates that the {{ $conversion['name'] }} has become stronger
                         against the Nigerian Naira by 108.86% over the past year.
                     </p>
                     <p class="mt-2">The pair experienced high volatility of 127.96%.</p>
@@ -241,7 +257,7 @@
                                             <p>{{ $multiplier }} {{ $conversion['code'] }} to Nigerian Naira</p>
                                         </a>
                                  
-                                    <p>₦ {{ number_format($multiplier * $conversion['cbnRate'], 2) }}</p>
+                                    <p>₦ {{ number_format($multiplier * $conversion['rate'], 2) }}</p>
                                 </div>
                             @endforeach
                         </div>
@@ -262,7 +278,7 @@
                                             <p>{{ $multiplier }} {{ $conversion['code'] }} to Nigerian Naira</p>
                                         </a>
                                  
-                                    <p>₦ {{ number_format($multiplier * $conversion['blackMarketRate'], 2) }}</p>
+                                    <p>₦ {{ number_format($multiplier * $conversion['rate'], 2) }}</p>
                                 </div>
                             @endforeach
                         </div>
@@ -629,7 +645,7 @@
 
             async function setDefaultConversion() {
                 frmCurrency.value = '1'; // Ensure the default value is "USD"
-                amountInput.value = 1; // Default to 1 unit
+                amountInput.value =  {{ $conversion['amount'] }}; // Default to 1 unit
                 await updateConversion();
             }
 
