@@ -6,6 +6,7 @@
         <meta name="author" content="" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
         <meta name="keywords" content="" />
         <meta name="description" content="" />
 
@@ -47,7 +48,25 @@
                 text-decoration: none; /* Prevents underline or color change on hover/focus */
                 color: inherit; /* Ensures no hover effect alters the color */
             }
+
+            #rate .rate {
+    width: 40%;
+}
+@media (max-width: 576px) { 
+    #rate .rate {
+        width: 100%;
+    }
+}
+@media (max-width: 767.98px) {
+    #rate .rate {
+       width: 70%;
+    }
+}
     </style>
+
+<style>
+   
+  </style>
     </head>
     <body>
 
@@ -71,7 +90,7 @@
                                 <a class="nav-link active">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="blog.html">Blog</a>
+                                <a class="nav-link"   href="{{ route('blogs.index') }}">Blog</a>
                             </li>
                         </ul>
                     </div>
@@ -99,22 +118,21 @@
                     <!-- Hero Table -->
                     <div class="px-3">
                        
-                           <div class="row">
+                        <div class="row">
                             <div class="table-responsive">
-                                <table id="rate" class="table table-striped">
+                                <table id="rate">
                                     <thead>
-                                        <tr >
-                                           
-                                            <th >Currency</th>
-                                            <th>Rate</th>
-                                            <th>Last Update</th>
+                                        <tr class="">
+                                            <th class="">Currency</th>
+                                            <th class="rate">Rate</th>
+                                            <th class="d-none d-md-table-cell">Last Updated</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($currencies as $key => $currency)
                                         <tr>
                                             <td>
-                                                <div style="display: flex; align-items: center;">
+                                                <div class="d-flex align-items-center">
                                                     <img src="{{ $currency->currency->image_url  }}" 
                                                          alt="{{ $currency->currency->name }}" 
                                                          style="width: 30px; height: 30px; margin-right: 10px; border-radius: 50%;">
@@ -124,40 +142,37 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td width="50%">
-                                                    <div class="row">
-                                                        <div class="col">BUY</div>
-                                                        <div class="col"><span class="overlay-text">{{ $currency->sign }}{{ number_format($currency->buy) }}</span></div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">SELL</div>
-                                                        <div class="col"><span class="overlay-text">{{ $currency->sign }}{{ number_format($currency->sell) }}</span></div>
-                                                    </div>
-                                                    {{-- <div style="margin-bottom: 5px;">
-                                                        <span style="font-weight: bold; color: black;"> {{ $currency->updated_at->diffForHumans() }}</span>
-                                                       
-                                                    </div> --}}
+                                            <td class="">
+                                                <div class="d-flex align-items-center justify-content-between justify-content-md-start flex-nowrap ">
+                                                    <p class="col">BUY</p>
+                                                    <p class="col-auto col-md"><span class="overlay-text">{{ $currency->sign }}{{ number_format($currency->buy) }}</span></p>
                                                 </div>
-                                                
+                                                <div class="d-flex align-items-center justify-content-between justify-content-md-start flex-nowrap ">
+                                                    <p class="col">SELL</p>
+                                                    <p class="col-auto col-md"><span class="overlay-text">{{ $currency->sign }}{{ number_format($currency->sell) }}</span></p>
+                                                    
+                                                </div>
+                                                <span class="d-md-none"  style="font-size: 14px; color: gray;">
+                                                    {{ $currency->updated_at->diffForHumans() }}
+                                                </span>
                                             </td>
-                                            <td>
+                                            <td class="d-none d-md-table-cell col">
                                                 <span style="font-size: 14px; color: gray;">
                                                     {{ $currency->updated_at->diffForHumans() }}
                                                 </span>
                                             </td>
                                         </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="4" class="text-center">No currencies available</td>
+                                        </tr>
+                                    @endforelse
                                         
-                                        @empty
-                                            <tr>
-                                                <td colspan="4" class="text-center">No currencies available</td>
-                                            </tr>
-                                        @endforelse
                                     </tbody>
                                 </table>
+                                
                             </div>
-                            
-                            
-                           </div>
+                        </div>
                       
                     </div>
                   

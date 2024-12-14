@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\BlogController;
 
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\ExchangeController;
 use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -20,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [CurrencyController::class, 'MAININDEX'])->name('index');
+
+Route::get('/blogs', [BlogController::class, 'showBlogs'])->name('blogs.index');
+Route::get('/blogs/{slug}', [BlogController::class, 'showBlogPost'])->name('blogs.show');
+
 Route::get('/{amount}-usd-to-ngn', [CurrencyController::class, 'convert'])->name('usd.to.ngn');
 
 

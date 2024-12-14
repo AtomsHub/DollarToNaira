@@ -33,18 +33,7 @@
         <link href="../assets/css/style.css" rel="stylesheet">
         <link href="../assets/css/responsive.css" rel="stylesheet">
 
-        <style>
-             .nav-logo-link {
-                text-decoration: none; /* Removes underline */
-                color: inherit; /* Inherits text color from the parent element */
-            }
-
-            .nav-logo-link:hover,
-            .nav-logo-link:focus {
-                text-decoration: none; /* Prevents underline or color change on hover/focus */
-                color: inherit; /* Ensures no hover effect alters the color */
-            }
-        </style>
+        
     </head>
     <body class="dashboard">
 
@@ -68,7 +57,7 @@
                                 <a class="nav-link" href="{{ route('index') }}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../blog.html">Blog</a>
+                                <a class="nav-link" href="{{ route('blogs.index') }}">Blog</a>
                             </li>
                         </ul>
                     </div>
