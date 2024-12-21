@@ -23,6 +23,21 @@ class CurrencyController extends Controller
 
     public function MAININDEX()
     {
+        $response = Http::get('https://dollartonaira.com.ng/MyBlog/wp-json/wp/v2/posts?_embed');
+        $posts = $response->json();
+
+        $blogs = collect($posts)->map(function ($post) {
+            return [
+                'title' => $post['title']['rendered'],
+                'excerpt' => strip_tags($post['excerpt']['rendered']),
+                'date' => date('d/m/Y', strtotime($post['date'])),
+                'thumbnail' => $post['_embedded']['wp:featuredmedia'][0]['source_url'] ?? 'assets/img/blog/default.jpg',
+                'link' => $post['link'],
+                'slug' => $post['slug'],
+            ];
+        });
+
+
         $currencies = Currencyrates::all();
         $ExchangeRate = ExchangeRate::all();
         // $rate = DB::table('exchange_rates')
@@ -45,7 +60,7 @@ class CurrencyController extends Controller
             ];
         }
 
-        return view('index', compact('currencies','ExchangeRate', 'conversions'));
+        return view('index', compact('blogs','currencies','ExchangeRate', 'conversions'));
     }
 
 

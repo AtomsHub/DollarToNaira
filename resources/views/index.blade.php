@@ -359,7 +359,7 @@
 
                 <div class="col-12">
                     <div class="row row-cols row-cols-1 row-cols-md-2 g-4">
-                        <div class="col blog-wrapper">
+                        {{-- <div class="col blog-wrapper">
                             <div class="blog-card p-2">
                                 <div class="blog-thumbnail col-3 rounded">
                                     <img src="assets/img/blog/dollar.jpg" alt="Blog Thumbnail" class="thumbnail-img">
@@ -369,11 +369,6 @@
                                         How to make 1 million dollars in 100 days without working
                                     </p>
 
-                                    {{-- <p class="blog-details">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sollicitudin odio. Nulla facilisi. Donec eleifend, felis vel laoreet tristique, velit mauris euismod arcu, at placerat felis ligula non erat.
-                                    </p> --}}
-
-            
                                     <div class="blog-meta mt-2">
                                         <p class="blog-date">24/11/2024</p>
                                         <div class="blog-info d-flex justify-content-between align-items-center">
@@ -386,157 +381,43 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col blog-wrapper">
-                            <div class="blog-card p-2">
-                                <div class="blog-thumbnail col-3 rounded">
-                                    <img src="assets/img/blog/dollar.jpg" alt="Blog Thumbnail" class="thumbnail-img">
-                                </div>
-                                <div class="blog-content col p-1 ps-2">
-                                    <p class="blog-title">
-                                        How to make 1 million dollars in 100 days without working
-                                    </p>
-
-                                    {{-- <p class="blog-details">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sollicitudin odio. Nulla facilisi. Donec eleifend, felis vel laoreet tristique, velit mauris euismod arcu, at placerat felis ligula non erat.
-                                    </p> --}}
-
-            
-                                    <div class="blog-meta mt-2">
-                                        <p class="blog-date">24/11/2024</p>
-                                        <div class="blog-info d-flex justify-content-between align-items-center">
-                                            <div class="reading-info">
-                                                <img src="assets/img/svg/time-icon.svg" alt="Time Icon" class="time-icon" height="10">
-                                                <span class="read-time">5 min Read</span>
+                        </div> --}}
+                        @foreach ($blogs as $blog)
+                            <div class="col blog-wrapper">
+                                <div class="blog-card p-2">
+                                    <div class="blog-thumbnail col-3 rounded">
+                                        <img src="{{ $blog['thumbnail'] }}" alt="{{ $blog['title'] }}" class="thumbnail-img">
+                                    </div>
+                                    <div class="blog-content col p-1 ps-2">
+                                        <a href="{{ route('blogs.show', $blog['slug']) }}"><p class="blog-title">
+                                            {{ $blog['title'] }}
+                                        </p></a>
+                            
+                                        <p class="blog-details">
+                                            {!! $blog['excerpt'] !!}
+                                        </p>
+                            
+                                        <div class="blog-meta mt-2">
+                                            <p class="blog-date">{{ $blog['date'] }}</p>
+                                            <div class="blog-info d-flex justify-content-between align-items-center">
+                                                <div class="reading-info">
+                                                    <img src="../assets/img/svg/time-icon.svg" alt="Time Icon" class="time-icon" height="10">
+                                                    <span class="read-time">5 min Read</span>
+                                                </div>
+                                                <a href="{{ route('blogs.show', $blog['slug']) }}">Read More</a>
+                                                {{-- <a href="{{ $blog['link'] }}" class="read-more-link link-primary" target="_blank">Read More</a> --}}
                                             </div>
-                                            <a href="#" class="read-more-link link-primary">Read More</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col blog-wrapper">
-                            <div class="blog-card p-2">
-                                <div class="blog-thumbnail col-3 rounded">
-                                    <img src="assets/img/blog/dollar.jpg" alt="Blog Thumbnail" class="thumbnail-img">
-                                </div>
-                                <div class="blog-content col p-1 ps-2">
-                                    <p class="blog-title">
-                                        How to make 1 million dollars in 100 days without working
-                                    </p>
-
-                                    {{-- <p class="blog-details">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sollicitudin odio. Nulla facilisi. Donec eleifend, felis vel laoreet tristique, velit mauris euismod arcu, at placerat felis ligula non erat.
-                                    </p> --}}
-
-            
-                                    <div class="blog-meta mt-2">
-                                        <p class="blog-date">24/11/2024</p>
-                                        <div class="blog-info d-flex justify-content-between align-items-center">
-                                            <div class="reading-info">
-                                                <img src="assets/img/svg/time-icon.svg" alt="Time Icon" class="time-icon" height="10">
-                                                <span class="read-time">5 min Read</span>
-                                            </div>
-                                            <a href="#" class="read-more-link link-primary">Read More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col blog-wrapper">
-                            <div class="blog-card p-2">
-                                <div class="blog-thumbnail col-3 rounded">
-                                    <img src="assets/img/blog/dollar.jpg" alt="Blog Thumbnail" class="thumbnail-img">
-                                </div>
-                                <div class="blog-content col p-1 ps-2">
-                                    <p class="blog-title">
-                                        How to make 1 million dollars in 100 days without working
-                                    </p>
-
-                                    {{-- <p class="blog-details">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sollicitudin odio. Nulla facilisi. Donec eleifend, felis vel laoreet tristique, velit mauris euismod arcu, at placerat felis ligula non erat.
-                                    </p> --}}
-
-            
-                                    <div class="blog-meta mt-2">
-                                        <p class="blog-date">24/11/2024</p>
-                                        <div class="blog-info d-flex justify-content-between align-items-center">
-                                            <div class="reading-info">
-                                                <img src="assets/img/svg/time-icon.svg" alt="Time Icon" class="time-icon" height="10">
-                                                <span class="read-time">5 min Read</span>
-                                            </div>
-                                            <a href="#" class="read-more-link link-primary">Read More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col blog-wrapper">
-                            <div class="blog-card p-2">
-                                <div class="blog-thumbnail col-3 rounded">
-                                    <img src="assets/img/blog/dollar.jpg" alt="Blog Thumbnail" class="thumbnail-img">
-                                </div>
-                                <div class="blog-content col p-1 ps-2">
-                                    <p class="blog-title">
-                                        How to make 1 million dollars in 100 days without working
-                                    </p>
-
-                                    {{-- <p class="blog-details">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sollicitudin odio. Nulla facilisi. Donec eleifend, felis vel laoreet tristique, velit mauris euismod arcu, at placerat felis ligula non erat.
-                                    </p> --}}
-
-            
-                                    <div class="blog-meta mt-2">
-                                        <p class="blog-date">24/11/2024</p>
-                                        <div class="blog-info d-flex justify-content-between align-items-center">
-                                            <div class="reading-info">
-                                                <img src="assets/img/svg/time-icon.svg" alt="Time Icon" class="time-icon" height="10">
-                                                <span class="read-time">5 min Read</span>
-                                            </div>
-                                            <a href="#" class="read-more-link link-primary">Read More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col blog-wrapper">
-                            <div class="blog-card p-2">
-                                <div class="blog-thumbnail col-3 rounded">
-                                    <img src="assets/img/blog/dollar.jpg" alt="Blog Thumbnail" class="thumbnail-img">
-                                </div>
-                                <div class="blog-content col p-1 ps-2">
-                                    <p class="blog-title">
-                                        How to make 1 million dollars in 100 days without working
-                                    </p>
-
-                                    {{-- <p class="blog-details">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sollicitudin odio. Nulla facilisi. Donec eleifend, felis vel laoreet tristique, velit mauris euismod arcu, at placerat felis ligula non erat.
-                                    </p> --}}
-
-            
-                                    <div class="blog-meta mt-2">
-                                        <p class="blog-date">24/11/2024</p>
-                                        <div class="blog-info d-flex justify-content-between align-items-center">
-                                            <div class="reading-info">
-                                                <img src="assets/img/svg/time-icon.svg" alt="Time Icon" class="time-icon" height="10">
-                                                <span class="read-time">5 min Read</span>
-                                            </div>
-                                            <a href="#" class="read-more-link link-primary">Read More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+                      
                     </div>
                 </div>
 
                 <div class="col-12 text-center">
-                    <a href="#" class="btn btn-primary px-5">Read More</a>
+                    <a href="{{ route('blogs.index') }}" class="btn btn-primary px-5">Read More</a>
                 </div>
 
             </div>

@@ -124,13 +124,13 @@
 
         <section class="bg-white px-3 px-md-0">
             <div class="container">
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <h3 class="fw-semibold">What is the {{ $conversion['name'] }} worth against the Nigerian Naira today?</h3>
                     <p class="mt-2">1 {{ $conversion['code'] }} is worth  ₦{{ number_format($conversion['rate'], 2) }}  NGN today</p>
-                </div>
+                </div> --}}
     
                 <div class="mb-4">
-                    <h3 class="fw-semibold">How much is {{ $conversion['amount'] }}  {{ $conversion['code'] }} worth in NGN?</h3>
+                    <h1 class="fw-semibold">How much is {{ $conversion['amount'] }}  {{ $conversion['code'] }} worth in NGN?</h1>
                     <p class="mt-2">At the current exchange rate of ₦{{ number_format($conversion['rate'], 2) }} , a sum of  {{ $conversion['amount'] }} {{ $conversion['name'] }} is worth ₦ {{ number_format( $conversion['amount'] *$conversion['rate'], 2) }} Nigerian Naira.</p>
                 </div>
             </div>
@@ -213,7 +213,7 @@
                     <p class="mt-2">High volatility means there is a higher risk of significant price changes. It is better to closely monitor the exchange rate in such situations.</p>
                 </div>
     
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <h2 class="fw-bold mb-3">{{ $conversion['code'] }} to NGN Currency Performance and Volatility</h2>
                     <h3 class="fw-semibold">Last 7 Days</h3>
                     <ul>
@@ -244,7 +244,7 @@
                         <li><strong>Performance:</strong> £1,000 ranged from ₦988.703 (yearly low) to ₦2,253.841 (yearly high), a variance of ₦1,265.138 .</li>
                         <li><strong>Volatility:</strong> Fluctuated by 127.96%.</li>
                     </ul>
-                </div>
+                </div> --}}
     
                 {{-- <div class="mb-4">
                     <h2 class="fw-bold mb-3">{{ $conversion['code'] }} to NGN Forecast and trending</h2>

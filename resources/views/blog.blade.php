@@ -29,15 +29,30 @@
         <!-- Custom CSS -->
         <link href="../assets/css/style.css" rel="stylesheet">
         <link href="../assets/css/responsive.css" rel="stylesheet">
+
+        <style>
+        .nav-logo-link {
+                text-decoration: none; /* Removes underline */
+                color: inherit; /* Inherits text color from the parent element */
+            }
+
+            .nav-logo-link:hover,
+            .nav-logo-link:focus {
+                text-decoration: none; /* Prevents underline or color change on hover/focus */
+                color: inherit; /* Ensures no hover effect alters the color */
+            }
+        </style>
     </head>
     <body>
 
         <!-- Header Starts -->
         <header class="">
             <nav class="navbar navbar-dark navbar-expand-lg d-flex justify-content-between align-items-center py-4 px-3 px-md-5">
-                <div class="nav-logo d-flex align-items-center justify-content-between">
-                    <span class="nav-logo_text ms-2">DollarToNaira</span>
-                </div>
+                <a href="/" class="nav-logo-link">
+                    <div class="nav-logo d-flex align-items-center justify-content-between">
+                        <span class="nav-logo_text ms-2">DollarToNaira</span>
+                    </div>
+                </a>
                 <div class="d-flex gap-3 align-items-center">
                     <a href="" class="d-flex">
                         <img src="../assets/img/svg/search.svg" alt="" />
@@ -80,9 +95,9 @@
                                     <img src="{{ $blog['thumbnail'] }}" alt="{{ $blog['title'] }}" class="thumbnail-img">
                                 </div>
                                 <div class="blog-content col p-1 ps-2">
-                                    <p class="blog-title">
+                                    <a href="{{ route('blogs.show', $blog['slug']) }}"><p class="blog-title">
                                         {{ $blog['title'] }}
-                                    </p>
+                                    </p></a>
                         
                                     <p class="blog-details">
                                         {!! $blog['excerpt'] !!}
@@ -126,9 +141,9 @@
                                             <img src="{{ $latestPost['_embedded']['wp:featuredmedia'][0]['source_url'] ?? 'assets/img/blog/default-thumbnail.jpg' }}" alt="Blog Thumbnail" class="thumbnail-img">
                                         </div>
                                         <div class="blog-content col p-1 ps-2">
-                                            <p class="blog-title fw-medium mb-2">
+                                              <a href="{{ route('blogs.show', $blog['slug']) }}"><p class="blog-title fw-medium mb-2">
                                                 {{ $latestPost['title']['rendered'] }}
-                                            </p>
+                                            </p></a>
         
                                             <div class="blog-meta mt-2">
                                                 <p class="blog-date">{{ \Carbon\Carbon::parse($latestPost['date'])->format('d/m/Y') }}</p>
